@@ -14,8 +14,6 @@ composer require jswei/igetui-thinkphp5 dev-master
 
 ## 运行示例
 以下为各推送平台的配置，你用哪个平台就复制哪个配置
-
-## 配置
 ```php
 <?php
 
@@ -65,9 +63,51 @@ $push = \jswei\push\core\PushFactory::getInstance($driveName)::init($config)
         ->setTitle('标题')
         ->setBody('消息正文')
         ->setExtendedData(['a' => 1, 'b' => 2]);// 自定义扩展参数
+```
 
-        
-        
+
+## ThinkPHP5容器运行
+```php
+<?php
+// -------------------- ThinkPHP5容器运行 ---------------------
+ // provider.php
+ return [
+    'GeTui' => jswei\push\drive\GeTuiService::class
+ ];
+ // config/getui.php
+ return [
+    'AppID' => 'gOgGqTwgRh7vHyFk0r4yIA',
+    'AppKey' => 'BhwmxGZyBU9EzbKxYXfuE7',
+    'MasterSecret' => 'ZYaWeKKGAL8Y8vTrwiYf9A',
+    'AppSecret'=>'zlNnaU8SYd9VLuQJ2RNBY7',
+    'LogoUrl' => 'http://dev.img.ybzg.com/static/app/user/getui_logo.png',
+ ];
+
+ // 使用
+ $config = config('getui.');
+
+ $igt = app('GeTui')->init($config);
+ $igt->setTitle('测试通知');
+ $igt->setBody('测试的通知他');
+ //$igt->setLogo('https://gitee.com/uploads/69/144269_jswei.png?1418807117');
+ //$igt->setLogoURL('https://gitee.com/uploads/69/144269_jswei.png?1418807117');
+ $igt->setExtendedData(['title'=>'a new','content'=>'this is a text']);
+ $res = $igt->sendOneAndroid('b0a1bdd6cc90e05dfa9c4104f12f175c');
+ var_dump($res->getResult());
+ 
+
+```
+
+
+## 推送方法
+```php
+<?php
+$config = [
+  'AppID' => 'AppID',
+  'AppKey' => 'AppKey',
+  'MasterSecret' => 'AppKey',
+];
+$push = \jswei\push\core\PushFactory::getInstance('GeTui')::init($config);
 //   ***************  发送方法  **********   
 # 广播：所有平台
 $push->sendAll();
@@ -82,32 +122,6 @@ $push->sendOne('设备码');
 $push->sendOneAndroid('设备码');
 # 单播：IOS
 $push->sendOneIOS('设备码');
-```
-```php
-<?php
-// -------------------- ThinkPHP5容器运行 ---------------------
-// provider.php
-return [
-    'GeTui' => jswei\push\drive\GeTuiService::class
-];
-// config/getui.php
-return [
-    'AppID' => 'gOgGqTwgRh7vHyFk0r4yIA',
-    'AppKey' => 'BhwmxGZyBU9EzbKxYXfuE7',
-    'MasterSecret' => 'ZYaWeKKGAL8Y8vTrwiYf9A',
-    'AppSecret'=>'zlNnaU8SYd9VLuQJ2RNBY7',
-    'LogoUrl' => 'http://dev.img.ybzg.com/static/app/user/getui_logo.png',
-];
-
-// 使用
- $igt = app('GeTui')->init($config);
- $igt->setTitle('测试通知');
- $igt->setBody('测试的通知他');
- //$igt->setLogo('https://gitee.com/uploads/69/144269_jswei.png?1418807117');
- //$igt->setLogoURL('https://gitee.com/uploads/69/144269_jswei.png?1418807117');
- $igt->setExtendedData(['title'=>'a new','content'=>'this is a text']);
- $res = $igt->sendOneAndroid('b0a1bdd6cc90e05dfa9c4104f12f175c');
- var_dump($res->getResult());
 
 ```
 
