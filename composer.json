@@ -1,0 +1,20 @@
+{
+    "name": "jswei/igetui-thinkphp5",
+    "description": "igetui for thinkPHP 5",
+    "require": {
+        "php": ">=7.0.0"
+    },
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "文化人干流氓事",
+            "email": "524314430@qq.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "xing\\push\\": ""
+        }
+    }
+}
