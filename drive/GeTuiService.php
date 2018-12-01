@@ -3,7 +3,6 @@ namespace jswei\push\drive;
 
 use jswei\push\sdk\geTui\IGeTui;
 use jswei\push\sdk\geTui\igetui\IGtAppMessage;
-use jswei\push\sdk\geTui\igetui\IGtAPNPayload;
 use jswei\push\sdk\geTui\igetui\template\IGtNotificationTemplate;
 use jswei\push\sdk\geTui\igetui\IGtSingleMessage;
 use jswei\push\sdk\geTui\igetui\IGtTarget;
