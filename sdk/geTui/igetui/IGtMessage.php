@@ -1,7 +1,7 @@
 <?php
 
 
-namespace xing\push\sdk\geTui\igetui;
+namespace jswei\push\sdk\geTui\igetui;
 
 class IGtMessage{
 	var  $isOffline;

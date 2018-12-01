@@ -1,5 +1,5 @@
 <?php
-namespace xing\push\sdk\uMeng\notification;
+namespace jswei\push\sdk\uMeng\notification;
 
 class IOSNotification extends UmengNotification {
 	// The array for payload, please see API doc for more information

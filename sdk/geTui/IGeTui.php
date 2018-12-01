@@ -2,12 +2,12 @@
 /**
  * VERSION 3.3.2.1
  */
-namespace xing\push\sdk\geTui;
+namespace jswei\push\sdk\geTui;
 
 
-use xing\push\sdk\geTui\igetui\utils\HttpManager;
-use xing\push\sdk\geTui\igetui\utils\ApiUrlRespectUtils;
-use xing\push\sdk\geTui\igetui\IGtAppMessage;
+use jswei\push\sdk\geTui\igetui\utils\HttpManager;
+use jswei\push\sdk\geTui\igetui\utils\ApiUrlRespectUtils;
+use jswei\push\sdk\geTui\igetui\IGtAppMessage;
 
 Class IGeTui
 {
@@ -303,7 +303,7 @@ Class IGeTui
     }
 
     /**
-     * @param \xing\push\sdk\geTui\igetui\IGtAppMessage $message
+     * @param \jswei\push\sdk\geTui\igetui\IGtAppMessage $message
      * @param null $taskGroupName
      * @return mixed|null
      */
@@ -319,7 +319,7 @@ Class IGeTui
     }
 
     /**
-     * @param \xing\push\sdk\geTui\igetui\IGtAppMessage $message
+     * @param \jswei\push\sdk\geTui\igetui\IGtAppMessage $message
      * @param null $taskGroupName
      * @return mixed
      */

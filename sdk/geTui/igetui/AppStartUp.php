@@ -6,9 +6,9 @@
  * Time: 2:08
  */
 
-namespace xing\push\sdk\geTui\igetui;
+namespace jswei\push\sdk\geTui\igetui;
 
-use xing\push\sdk\geTui\protobuf\PBMessage;
+use jswei\push\sdk\geTui\protobuf\PBMessage;
 
 class AppStartUp extends PBMessage
 {
@@ -16,11 +16,11 @@ class AppStartUp extends PBMessage
     public function __construct($reader=null)
     {
         parent::__construct($reader);
-        $this->fields['1'] = '\xing\push\sdk\geTui\protobuf\type\PBString';
+        $this->fields['1'] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values['1'] = '';
-        $this->fields['2'] = '\xing\push\sdk\geTui\protobuf\type\PBString';
+        $this->fields['2'] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values['2'] = '';
-        $this->fields['3'] = '\xing\push\sdk\geTui\protobuf\type\PBString';
+        $this->fields['3'] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values['3'] = '';
     }
     function android()

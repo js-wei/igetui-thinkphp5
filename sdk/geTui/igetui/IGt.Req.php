@@ -1,6 +1,10 @@
 <?php
 
-namespace xing\push\sdk\geTui\igetui;
+namespace jswei\push\sdk\geTui\igetui;
+
+use jswei\push\sdk\geTui\protobuf\PBMessage;
+use jswei\push\sdk\geTui\protobuf\type\PBBool;
+use jswei\push\sdk\geTui\protobuf\type\PBEnum;
 
 class CmdID extends PBEnum
 {

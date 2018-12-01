@@ -6,7 +6,7 @@
  * Time: 下午3:17
  */
 
-namespace xing\push\sdk\geTui\igetui\utils;
+namespace jswei\push\sdk\geTui\igetui\utils;
 
 class LogUtils
 {

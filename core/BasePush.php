@@ -1,19 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: xing.chen
- * Date: 2018/1/13
- * Time: 19:42
- */
-
-namespace xing\push\core;
+namespace jswei\push\core;
 
 /**
  * Class BasePush
  * @property string $title 标题
  * @property string $body 消息正文
  * @property array $extendedData 扩展参数
- * @package xing\push\core
+ * @package jswei\push\core
  */
 class BasePush
 {

@@ -1,14 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: xing.chen
- * Date: 2018/3/17
- * Time: 1:47
- */
+namespace jswei\push\sdk\geTui\igetui;
 
-namespace xing\push\sdk\geTui\igetui;
-
-use xing\push\sdk\geTui\protobuf\PBMessage;
+use jswei\push\sdk\geTui\protobuf\PBMessage;
 
 class PushInfo extends PBMessage
 {
@@ -16,35 +9,35 @@ class PushInfo extends PBMessage
     public function __construct($reader=null)
     {
         parent::__construct($reader);
-        $this->fields['1'] = '\xing\push\sdk\geTui\protobuf\type\PBString';
+        $this->fields['1'] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values['1'] = '';
-        $this->fields['2'] = '\xing\push\sdk\geTui\protobuf\type\PBString';
+        $this->fields['2'] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values['2'] = '';
-        $this->fields['3'] = '\xing\push\sdk\geTui\protobuf\type\PBString';
+        $this->fields['3'] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values['3'] = '';
-        $this->fields['4'] = '\xing\push\sdk\geTui\protobuf\type\PBString';
+        $this->fields['4'] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values['4'] = '';
-        $this->fields['5'] = '\xing\push\sdk\geTui\protobuf\type\PBString';
+        $this->fields['5'] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values['5'] = '';
-        $this->fields['6'] = '\xing\push\sdk\geTui\protobuf\type\PBString';
+        $this->fields['6'] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values['6'] = '';
-        $this->fields['7'] = '\xing\push\sdk\geTui\protobuf\type\PBString';
+        $this->fields['7'] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values['7'] = '';
-        $this->fields['8'] = '\xing\push\sdk\geTui\protobuf\type\PBString';
+        $this->fields['8'] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values['8'] = '';
-        $this->fields['9'] = '\xing\push\sdk\geTui\protobuf\type\PBString';
+        $this->fields['9'] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values['9'] = '';
-        $this->fields['10'] = '\xing\push\sdk\geTui\protobuf\type\PBInt';
+        $this->fields['10'] = '\jswei\push\sdk\geTui\protobuf\type\PBInt';
         $this->values['10'] = '';
-        $this->fields['11'] = '\xing\push\sdk\geTui\protobuf\type\PBBool';
+        $this->fields['11'] = '\jswei\push\sdk\geTui\protobuf\type\PBBool';
         $this->values['11'] = '';
-        $this->fields['12'] = '\xing\push\sdk\geTui\protobuf\type\PBString';
+        $this->fields['12'] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values['12'] = '';
-        $this->fields['13'] = '\xing\push\sdk\geTui\protobuf\type\PBBool';
+        $this->fields['13'] = '\jswei\push\sdk\geTui\protobuf\type\PBBool';
         $this->values['13'] = '';
-        $this->fields['14'] = '\xing\push\sdk\geTui\protobuf\type\PBString';
+        $this->fields['14'] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values['14'] = '';
-        $this->fields['15'] = '\xing\push\sdk\geTui\protobuf\type\PBBool';
+        $this->fields['15'] = '\jswei\push\sdk\geTui\protobuf\type\PBBool';
         $this->values['15'] = '';
         $this->fields['16'] = 'NotifyInfo';
         $this->values['16'] = '';

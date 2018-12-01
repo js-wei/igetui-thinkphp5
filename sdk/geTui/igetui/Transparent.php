@@ -1,19 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: xing.chen
- * Date: 2018/3/17
- * Time: 0:57
- */
+namespace jswei\push\sdk\geTui\igetui;
 
-namespace xing\push\sdk\geTui\igetui;
-
-use xing\push\sdk\geTui\protobuf\PBMessage;
-
-use xing\push\sdk\geTui\protobuf\type\PBString;
-use xing\push\sdk\geTui\protobuf\type\PushInfo;
-use xing\push\sdk\geTui\protobuf\type\ActionChain;
-use xing\push\sdk\geTui\protobuf\type\PBInt;
+use jswei\push\sdk\geTui\protobuf\PBMessage;
 
 class Transparent extends PBMessage
 {
@@ -21,27 +9,27 @@ class Transparent extends PBMessage
     public function __construct($reader=null)
     {
         parent::__construct($reader);
-        $this->fields['1'] = '\xing\push\sdk\geTui\protobuf\type\PBString';
+        $this->fields['1'] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values['1'] = '';
-        $this->fields['2'] = '\xing\push\sdk\geTui\protobuf\type\PBString';
+        $this->fields['2'] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values['2'] = '';
-        $this->fields['3'] = '\xing\push\sdk\geTui\protobuf\type\PBString';
+        $this->fields['3'] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values['3'] = '';
-        $this->fields['4'] = '\xing\push\sdk\geTui\protobuf\type\PBString';
+        $this->fields['4'] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values['4'] = '';
-        $this->fields['5'] = '\xing\push\sdk\geTui\protobuf\type\PBString';
+        $this->fields['5'] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values['5'] = '';
-        $this->fields['6'] = '\xing\push\sdk\geTui\protobuf\type\PBString';
+        $this->fields['6'] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values['6'] = '';
-        $this->fields['7'] = '\xing\push\sdk\geTui\protobuf\type\PushInfo';
+        $this->fields['7'] = '\jswei\push\sdk\geTui\protobuf\type\PushInfo';
         $this->values['7'] = '';
-        $this->fields['8'] = '\xing\push\sdk\geTui\igetui\ActionChain';
+        $this->fields['8'] = '\jswei\push\sdk\geTui\igetui\ActionChain';
         $this->values['8'] = array();
-        $this->fields['9'] = '\xing\push\sdk\geTui\protobuf\type\PBString';
+        $this->fields['9'] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values['9'] = array();
-        $this->fields['10'] = '\xing\push\sdk\geTui\protobuf\type\PBInt';
+        $this->fields['10'] = '\jswei\push\sdk\geTui\protobuf\type\PBInt';
         $this->values['10'] = '';
-        $this->fields['11'] = '\xing\push\sdk\geTui\protobuf\type\PBString';
+        $this->fields['11'] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values['11'] = '';
     }
     function id()

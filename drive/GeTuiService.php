@@ -1,21 +1,14 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: xing.chen
- * Date: 2018/3/17
- * Time: 0:00
- */
+namespace jswei\push\drive;
 
-namespace xing\push\drive;
+use jswei\push\sdk\geTui\IGeTui;
+use jswei\push\sdk\geTui\igetui\IGtAppMessage;
+use jswei\push\sdk\geTui\igetui\IGtAPNPayload;
+use jswei\push\sdk\geTui\igetui\template\IGtNotificationTemplate;
+use jswei\push\sdk\geTui\igetui\IGtSingleMessage;
+use jswei\push\sdk\geTui\igetui\IGtTarget;
 
-use xing\push\sdk\geTui\IGeTui;
-use xing\push\sdk\geTui\igetui\IGtAppMessage;
-use xing\push\sdk\geTui\igetui\IGtAPNPayload;
-use xing\push\sdk\geTui\igetui\template\IGtNotificationTemplate;
-use xing\push\sdk\geTui\igetui\IGtSingleMessage;
-use xing\push\sdk\geTui\igetui\IGtTarget;
-
-class GeTuiService extends \xing\push\core\BasePush implements \xing\push\core\PushInterface
+class GeTuiService extends \jswei\push\core\BasePush implements \jswei\push\core\PushInterface
 {
 
     protected $config = [];

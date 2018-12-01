@@ -3,9 +3,9 @@
  * @author Nikolai Kordulla
  */
 
-namespace xing\push\sdk\geTui\protobuf\type;
+namespace jswei\push\sdk\geTui\protobuf\type;
 
-use xing\push\sdk\geTui\protobuf\PBMessage;
+use jswei\push\sdk\geTui\protobuf\PBMessage;
 class PBString extends PBScalar
 {
 	var $wired_type = PBMessage::WIRED_LENGTH_DELIMITED;

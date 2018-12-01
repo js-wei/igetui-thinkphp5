@@ -1,5 +1,5 @@
 <?php
-namespace xing\push\sdk\uMeng\notification;
+namespace jswei\push\sdk\uMeng\notification;
 
 abstract class UmengNotification {
 	// The host

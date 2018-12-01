@@ -9,10 +9,10 @@
  */
 
 
-namespace xing\push\sdk\geTui\protobuf;
+namespace jswei\push\sdk\geTui\protobuf;
 
-use xing\push\sdk\geTui\protobuf\encoding\base128varint;
-use \xing\push\sdk\geTui\igetui\ActionChain;
+use jswei\push\sdk\geTui\protobuf\encoding\base128varint;
+use \jswei\push\sdk\geTui\igetui\ActionChain;
 
 abstract class PBMessage
 {

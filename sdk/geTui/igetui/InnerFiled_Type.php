@@ -6,10 +6,10 @@
  * Time: 2:05
  */
 
-namespace xing\push\sdk\geTui\igetui;
+namespace jswei\push\sdk\geTui\igetui;
 
 
-class InnerFiled_Type extends \xing\push\sdk\geTui\protobuf\type\PBEnum
+class InnerFiled_Type extends \jswei\push\sdk\geTui\protobuf\type\PBEnum
 {
     const str  = 0;
     const int32  = 1;

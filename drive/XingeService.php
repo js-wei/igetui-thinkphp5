@@ -1,31 +1,21 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: xing.chen
- * Date: 2018/1/13
- * Time: 19:43
- * @author xing.chen
- * @ex
- */
+namespace jswei\push\drive;
 
-namespace xing\push\drive;
-
-
-use xing\push\core\PushInterface;
-use xing\push\sdk\xinge\XingeApp;
-use xing\push\sdk\xinge\Message;
-use xing\push\sdk\xinge\MessageIOS;
-use xing\push\sdk\xinge\Style;
-use xing\push\sdk\xinge\ClickAction;
-use xing\push\sdk\xinge\TimeInterval;
+use jswei\push\core\PushInterface;
+use jswei\push\sdk\xinge\XingeApp;
+use jswei\push\sdk\xinge\Message;
+use jswei\push\sdk\xinge\MessageIOS;
+use jswei\push\sdk\xinge\Style;
+use jswei\push\sdk\xinge\ClickAction;
+use jswei\push\sdk\xinge\TimeInterval;
 
 /**
  * Class XingeService
  * @property array $config
  * @property Message|MessageIOS $mess
- * @package xing\push\drive
+ * @package jswei\push\drive
  */
-class XingeService extends \xing\push\core\BasePush implements PushInterface
+class XingeService extends \jswei\push\core\BasePush implements PushInterface
 {
 
     private $config = [];

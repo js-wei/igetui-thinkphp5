@@ -1,13 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: xing.chen
- * Date: 2018/1/13
- * Time: 19:42
- */
-
-namespace xing\push\core;
-
+namespace jswei\push\core;
 
 interface PushInterface
 {

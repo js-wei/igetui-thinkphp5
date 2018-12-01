@@ -6,12 +6,12 @@
  * Time: 1:58
  */
 
-namespace xing\push\sdk\geTui\igetui;
+namespace jswei\push\sdk\geTui\igetui;
 
 
-use xing\push\sdk\geTui\protobuf\PBMessage;
+use jswei\push\sdk\geTui\protobuf\PBMessage;
 
-class ActionChain_Type extends \xing\push\sdk\geTui\protobuf\type\PBEnum
+class ActionChain_Type extends \jswei\push\sdk\geTui\protobuf\type\PBEnum
 {
     const refer  = 0;
     const notification  = 1;

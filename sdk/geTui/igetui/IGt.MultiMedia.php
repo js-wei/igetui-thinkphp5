@@ -1,11 +1,4 @@
 <?php
-/**
- * 个推IOS多媒体消息，支持图片、音频、视频
- * Created by PhpStorm.
- * User: zqzhao5
- * Date: 17-7-27
- * Time: 下午3:21
- */
 class IGtMultiMedia {
     /**
      * @var资源ID

@@ -2,8 +2,8 @@
 /**
  * @author Nikolai Kordulla
  */
-namespace xing\push\sdk\geTui\protobuf\type;
-use xing\push\sdk\geTui\protobuf\PBMessage;
+namespace jswei\push\sdk\geTui\protobuf\type;
+use jswei\push\sdk\geTui\protobuf\PBMessage;
 class PBBool extends PBInt
 {
 	var $wired_type = PBMessage::WIRED_VARINT;

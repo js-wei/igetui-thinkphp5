@@ -1,9 +1,9 @@
 <?php
 
-namespace xing\push\sdk\geTui\igetui\template;
+namespace jswei\push\sdk\geTui\igetui\template;
 
-use xing\push\sdk\geTui\igetui\Transparent;
-use xing\push\sdk\geTui\igetui\PushInfo;
+use jswei\push\sdk\geTui\igetui\Transparent;
+use jswei\push\sdk\geTui\igetui\PushInfo;
 
 class IGtBaseTemplate
 {

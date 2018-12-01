@@ -1,35 +1,21 @@
 <?php
-/**
- * 推送工厂
- * Created by PhpStorm.
- * User: xing.chen
- * Date: 2018/1/24
- * Time: 10:39
- */
+namespace jswei\push\core;
 
-namespace xing\push\core;
-use think\facade;
-
-class PushFactory extends facade
+class PushFactory
 {
 
     /**
      * @var array
      */
     private static $drive = [
-        'Umeng' => '\xing\push\drive\UmengService',
-        'GeTui' => '\xing\push\drive\GeTuiService',
-        'XingGe' => '\xing\push\drive\XinggeService',
+        'Umeng' => '\jswei\push\drive\UmengService',
+        'GeTui' => '\jswei\push\drive\GeTuiService',
+        'XingGe' => '\jswei\push\drive\XinggeService',
     ];
 
-
-    protected static function getFacadeClass()
-    {
-        return 'xing\push\core\PushFactory';
-    }
     /**
      * @param string $driveName 推送
-     * @return \xing\push\drive\UmengService
+     * @return \jswei\push\drive\UmengService
      * @throws \Exception
      */
     public static function getInstance(string $driveName)

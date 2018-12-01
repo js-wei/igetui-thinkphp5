@@ -1,19 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: xing.chen
- * Date: 2018/1/13
- * Time: 19:43
- * @author xing.chen
- * @ex
- */
+namespace jswei\push\drive;
 
-namespace xing\push\drive;
-
-
-use xing\push\core\PushInterface;
-use xing\push\sdk\uMeng\notification\AndroidNotification;
-use xing\push\sdk\uMeng\notification\IOSNotification;
+use jswei\push\core\PushInterface;
+use jswei\push\sdk\uMeng\notification\AndroidNotification;
+use jswei\push\sdk\uMeng\notification\IOSNotification;
 
 /**
  * Class UmengService
@@ -23,9 +13,9 @@ use xing\push\sdk\uMeng\notification\IOSNotification;
  * @property AndroidNotification|IOSNotification $sdk
  * @property string $platform
  * @property array $config
- * @package xing\push\drive
+ * @package jswei\push\drive
  */
-class UmengService extends \xing\push\core\BasePush implements PushInterface
+class UmengService extends \jswei\push\core\BasePush implements PushInterface
 {
 
     protected $appKey;

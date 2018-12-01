@@ -4,7 +4,7 @@
  * Base 128 varints - decodes and encodes base128 varints to/from decimal
  * @author Nikolai Kordulla
  */
-namespace xing\push\sdk\geTui\protobuf\encoding;
+namespace jswei\push\sdk\geTui\protobuf\encoding;
 class base128varint
 {
     // modus for output

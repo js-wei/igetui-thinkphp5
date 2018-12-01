@@ -1,6 +1,6 @@
 <?php
 
-namespace xing\push\sdk\geTui\igetui\template;
+namespace jswei\push\sdk\geTui\igetui\template;
 
 class IGtTransmissionTemplate extends IGtBaseTemplate {
 

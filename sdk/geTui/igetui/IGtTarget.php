@@ -1,5 +1,5 @@
 <?php
-namespace xing\push\sdk\geTui\igetui;
+namespace jswei\push\sdk\geTui\igetui;
 
 class IGtTarget{
 	var  $appId;
