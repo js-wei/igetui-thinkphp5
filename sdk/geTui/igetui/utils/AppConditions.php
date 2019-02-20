@@ -1,10 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Songmh
- * Date: 2015/9/21
- * Time: 21:54
- */
+namespace jswei\push\sdk\geTui\IGTui\utils;
+
  class OptType {
     const _OR_ = 0;
     const _AND_ = 1;
@@ -22,6 +18,11 @@
     //条件
 	var $condition = array();
 
+     /**
+      * @param $name
+      * @param $args
+      * @return mixed
+      */
      function __call ($name, $args )
      {
          if($name=='addCondition') {
@@ -34,7 +35,13 @@
          }
      }
 
-	function addCondition3($key, $values, $optType=0) {
+     /**
+      * @param $key
+      * @param $values
+      * @param OptType $optType
+      * @return $this
+      */
+	function addCondition3($key, $values, OptType $optType) {
         $item = array();
         $item["key"] = $key;
         $item["values"] = $values;
@@ -43,7 +50,7 @@
         return $this;
     }
      function addCondition2($key, $values) {
-         return $this->addCondition3($key, $values, 0);
+         return $this->addCondition3($key, $values, OptType::_OR_);
      }
 
      function getCondition() {

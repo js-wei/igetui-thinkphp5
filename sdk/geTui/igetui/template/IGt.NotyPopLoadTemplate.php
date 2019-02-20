@@ -1,4 +1,13 @@
 <?php
+namespace jswei\push\sdk\geTui\IGTui\template;
+
+use jswei\push\sdk\geTui\IGTui\ActionChain;
+use jswei\push\sdk\geTui\IGTui\ActionChain_Type;
+use jswei\push\sdk\geTui\IGTui\AppStartUp;
+use jswei\push\sdk\geTui\IGTui\Button;
+use jswei\push\sdk\geTui\IGTui\InnerFiled;
+use jswei\push\sdk\geTui\IGTui\InnerFiled_Type;
+
 class IGtNotyPopLoadTemplate extends IGtBaseTemplate {
 	/**
 	 * 通知栏图标

@@ -1,13 +1,13 @@
 <?php 
 
-namespace jswei\push\sdk\geTui\igetui\template;
+namespace jswei\push\sdk\geTui\IGTui\template;
 
 
-use jswei\push\sdk\geTui\igetui\ActionChain;
-use jswei\push\sdk\geTui\igetui\InnerFiled;
-use jswei\push\sdk\geTui\igetui\ActionChain_Type;
-use jswei\push\sdk\geTui\igetui\InnerFiled_Type;
-use jswei\push\sdk\geTui\igetui\AppStartUp;
+use jswei\push\sdk\geTui\IGTui\ActionChain;
+use jswei\push\sdk\geTui\IGTui\InnerFiled;
+use jswei\push\sdk\geTui\IGTui\ActionChain_Type;
+use jswei\push\sdk\geTui\IGTui\InnerFiled_Type;
+use jswei\push\sdk\geTui\IGTui\AppStartUp;
 
 class IGtNotificationTemplate extends IGtBaseTemplate {
 

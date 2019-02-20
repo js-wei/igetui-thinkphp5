@@ -1,6 +1,6 @@
 <?php
 
-namespace jswei\push\sdk\geTui\igetui;
+namespace jswei\push\sdk\geTui\IGTui;
 
 Class IGtSingleMessage extends IGtMessage{
 	

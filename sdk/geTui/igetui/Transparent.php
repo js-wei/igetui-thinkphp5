@@ -1,5 +1,5 @@
 <?php
-namespace jswei\push\sdk\geTui\igetui;
+namespace jswei\push\sdk\geTui\IGTui;
 
 use jswei\push\sdk\geTui\protobuf\PBMessage;
 
@@ -23,7 +23,7 @@ class Transparent extends PBMessage
         $this->values['6'] = '';
         $this->fields['7'] = '\jswei\push\sdk\geTui\protobuf\type\PushInfo';
         $this->values['7'] = '';
-        $this->fields['8'] = '\jswei\push\sdk\geTui\igetui\ActionChain';
+        $this->fields['8'] = '\jswei\push\sdk\geTui\IGTui\ActionChain';
         $this->values['8'] = array();
         $this->fields['9'] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values['9'] = array();

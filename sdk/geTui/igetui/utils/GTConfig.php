@@ -6,7 +6,7 @@
  * Time: 下午2:15
  */
 
-namespace jswei\push\sdk\geTui\igetui\utils;
+namespace jswei\push\sdk\geTui\IGTui\utils;
 
 class GTConfig
 {

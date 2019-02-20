@@ -1,4 +1,10 @@
-<?php 
+<?php
+namespace jswei\push\sdk\geTui\IGTui\template;
+
+use jswei\push\sdk\geTui\IGTui\ActionChain;
+use jswei\push\sdk\geTui\IGTui\ActionChain_Type;
+use jswei\push\sdk\geTui\IGTui\InnerFiled;
+use jswei\push\sdk\geTui\IGTui\InnerFiled_Type;
 
 class IGtLinkTemplate extends IGtBaseTemplate {
 

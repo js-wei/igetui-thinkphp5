@@ -1,9 +1,11 @@
 <?php
 
-namespace jswei\push\sdk\geTui\igetui\template;
+namespace jswei\push\sdk\geTui\IGTui\template;
 
-use jswei\push\sdk\geTui\igetui\Transparent;
-use jswei\push\sdk\geTui\igetui\PushInfo;
+use jswei\push\sdk\geTui\IGTui\DictionaryAlertMsg;
+use jswei\push\sdk\geTui\IGTui\IGtAPNPayload;
+use jswei\push\sdk\geTui\IGTui\Transparent;
+use jswei\push\sdk\geTui\IGTui\PushInfo;
 
 class IGtBaseTemplate
 {
@@ -57,9 +59,12 @@ class IGtBaseTemplate
         return $this->duration;
     }
 
-    function set_duration($begin, $end)
-
-    {
+    /**
+     * @param $begin
+     * @param $end
+     * @throws \Exception
+     */
+    function set_duration($begin, $end){
         date_default_timezone_set('asia/shanghai');
         /*  //for test
             var_dump(date("Y-m-d H:i:s",strtotime($begin)));
@@ -68,9 +73,9 @@ class IGtBaseTemplate
         $ss = (string)strtotime($begin) * 1000;
         $e = (string)strtotime($end) * 1000;
         if ($ss <= 0 || $e <= 0)
-            throw new Exception("DateFormat: yyyy-MM-dd HH:mm:ss");
+            throw new \Exception("DateFormat: yyyy-MM-dd HH:mm:ss");
         if ($ss > $e)
-            throw new Exception("startTime should be smaller than endTime");
+            throw new \Exception("startTime should be smaller than endTime");
 
         $this->duration = $ss . "-" . $e;
 
@@ -102,7 +107,19 @@ class IGtBaseTemplate
         return $this->pushInfo;
     }
 
-    function set_pushInfo($actionLocKey, $badge, $message, $sound, $payload, $locKey, $locArgs, $launchImage, $contentAvailable = 0)
+    /**
+     * @param $actionLocKey
+     * @param $badge
+     * @param $message
+     * @param $sound
+     * @param $payload
+     * @param $locKey
+     * @param $locArgs
+     * @param $launchImage
+     * @param int $contentAvailable
+     * @throws \Exception
+     */
+    public function set_pushInfo($actionLocKey, $badge, $message, $sound, $payload, $locKey, $locArgs, $launchImage, $contentAvailable = 0)
     {
         $apn = new IGtAPNPayload();
 
@@ -149,7 +166,11 @@ class IGtBaseTemplate
         $this->set_apnInfo($apn);
     }
 
-    function set_apnInfo($payload)
+    /**
+     * @param $payload
+     * @throws \Exception
+     */
+    public function set_apnInfo(IGtAPNPayload $payload)
     {
         if ($payload == null) {
             return;
@@ -160,7 +181,7 @@ class IGtBaseTemplate
         }
         $len = strlen($payload);
         if ($len > IGtAPNPayload::$PAYLOAD_MAX_BYTES) {
-            throw new Exception("APN payload length overlength (" . $len . ">" . IGtAPNPayload::$PAYLOAD_MAX_BYTES . ")");
+            throw new \Exception("APN payload length overlength (" . $len . ">" . IGtAPNPayload::$PAYLOAD_MAX_BYTES . ")");
         }
         $pushInfo = $this->get_pushInfo();
         $pushInfo->set_apnJson($payload);
@@ -177,8 +198,11 @@ class IGtBaseTemplate
         $this->appkey = $appkey;
     }
 
-    function abslength($str)
-    {
+    /**
+     * @param $str
+     * @return int
+     */
+    function abslength($str){
         if (empty($str)) {
             return 0;
         }

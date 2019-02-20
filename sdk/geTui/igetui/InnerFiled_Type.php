@@ -6,7 +6,7 @@
  * Time: 2:05
  */
 
-namespace jswei\push\sdk\geTui\igetui;
+namespace jswei\push\sdk\geTui\IGTui;
 
 
 class InnerFiled_Type extends \jswei\push\sdk\geTui\protobuf\type\PBEnum

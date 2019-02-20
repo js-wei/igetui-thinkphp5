@@ -7,13 +7,38 @@
  */
 Class ApnsUtils
 {
-
+    /**
+     * @param $locKey
+     * @param $locArgs
+     * @param $message
+     * @param $actionLocKey
+     * @param $launchImage
+     * @param $badge
+     * @param $sound
+     * @param $payload
+     * @param $contentAvailable
+     * @return int
+     * @throws Exception
+     */
     static function validatePayloadLength($locKey, $locArgs, $message, $actionLocKey, $launchImage, $badge, $sound, $payload,$contentAvailable)
     {
         $json = ApnsUtils :: processPayload($locKey, $locArgs, $message, $actionLocKey, $launchImage, $badge, $sound, $payload,$contentAvailable);
         return strlen($json);
     }
 
+    /**
+     * @param $locKey
+     * @param $locArgs
+     * @param $message
+     * @param $actionLocKey
+     * @param $launchImage
+     * @param $badge
+     * @param $sound
+     * @param $payload
+     * @param $contentAvailable
+     * @return string
+     * @throws Exception
+     */
     static function processPayload($locKey, $locArgs, $message, $actionLocKey, $launchImage, $badge, $sound, $payload, $contentAvailable)
     {
         $isValid = false;
@@ -108,13 +133,18 @@ Class Payload
         $this->params = $params;
     }
 
+    /**
+     * @param $key
+     * @param $obj
+     * @throws Exception
+     */
     function addParam($key, $obj)
     {
         if ($this->params == null) {
             $this->params = array();
         }
         if ($this->APS == strtolower($key)) {
-            throw new Exception("the key can't be aps");
+            throw new \Exception("the key can't be aps");
         }
         $this->params[$key] = $obj;
     }
@@ -262,6 +292,10 @@ Class Payload
 
 class Util
 {
+    /**
+     * @param $input
+     * @return false|string
+     */
     static function json_encode($input){
         // 从 PHP 5.4.0 起, 增加了这个选项.
         if(defined('JSON_UNESCAPED_UNICODE')){

@@ -6,7 +6,7 @@
  * Time: 1:54
  */
 
-namespace jswei\push\sdk\geTui\igetui;
+namespace jswei\push\sdk\geTui\IGTui;
 
 use jswei\push\sdk\geTui\protobuf\PBMessage;
 
@@ -21,7 +21,7 @@ class InnerFiled extends PBMessage
         $this->values['1'] = '';
         $this->fields['2'] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values['2'] = '';
-        $this->fields['3'] = '\jswei\push\sdk\geTui\igetui\InnerFiled_Type';
+        $this->fields['3'] = '\jswei\push\sdk\geTui\IGTui\InnerFiled_Type';
         $this->values['3'] = '';
     }
     function key()

@@ -6,7 +6,7 @@
  * Time: 1:58
  */
 
-namespace jswei\push\sdk\geTui\igetui;
+namespace jswei\push\sdk\geTui\IGTui;
 
 
 use jswei\push\sdk\geTui\protobuf\PBMessage;

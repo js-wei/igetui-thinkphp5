@@ -4,10 +4,15 @@
  */
 namespace jswei\push\sdk\geTui;
 
-
-use jswei\push\sdk\geTui\igetui\utils\HttpManager;
-use jswei\push\sdk\geTui\igetui\utils\ApiUrlRespectUtils;
-use jswei\push\sdk\geTui\igetui\IGtAppMessage;
+use jswei\push\sdk\geTui\IGTui\IGtAppMessage;
+use jswei\push\sdk\geTui\IGTui\IGtMessage;
+use jswei\push\sdk\geTui\IGTui\IGtTagMessage;
+use jswei\push\sdk\geTui\IGTui\Target;
+use jswei\push\sdk\geTui\IGTui\template\IGtNotificationTemplate;
+use jswei\push\sdk\geTui\IGTui\utils\ApiUrlRespectUtils;
+use jswei\push\sdk\geTui\IGTui\utils\GTConfig;
+use jswei\push\sdk\geTui\IGTui\utils\HttpManager;
+use jswei\push\sdk\geTui\IGTui\utils\LangUtils;
 
 Class IGeTui
 {
@@ -20,6 +25,14 @@ Class IGeTui
     var $domainUrlList =  array();
 	var $useSSL = NULL; //是否使用https连接 以该标志为准
 
+    /**
+     * IGeTui constructor.
+     * @param $domainUrl
+     * @param $appkey
+     * @param $masterSecret
+     * @param null $ssl
+     * @throws \Exception
+     */
     public function __construct($domainUrl, $appkey, $masterSecret, $ssl = NULL)
     {
         $this->appkey = $appkey;
@@ -43,6 +56,11 @@ Class IGeTui
         $this->initOSDomain(null);
     }
 
+    /**
+     * @param $hosts
+     * @return mixed|string
+     * @throws \Exception
+     */
     private function initOSDomain($hosts)
     {
         if($hosts == null || count($hosts) == 0)
@@ -53,15 +71,19 @@ Class IGeTui
                 $hosts = $this->getOSPushDomainUrlList($this->domainUrlList,$this->appkey);
                 IGeTui::$appkeyUrlList[$this->appkey] = $hosts;
             }
-        }
-        else
-        {
+        } else {
             IGeTui::$appkeyUrlList[$this->appkey] = $hosts;
         }
         $this->host = ApiUrlRespectUtils::getFastest($this->appkey, $hosts);
         return $this->host;
     }
 
+    /**
+     * @param $domainUrlList
+     * @param $appkey
+     * @return |null
+     * @throws \Exception
+     */
     public function getOSPushDomainUrlList($domainUrlList,$appkey)
     {
         $urlList = null;
@@ -80,7 +102,7 @@ Class IGeTui
                     break;
                 }
             }
-            catch (Exception $e)
+            catch (\Exception $e)
             {
                 $ex = $e;
             }
@@ -88,13 +110,19 @@ Class IGeTui
         if($urlList == null || count($urlList) <= 0)
         {
 			$h = implode(',', $domainUrlList);
-            throw new Exception("Can not get hosts from ".$h."|error:".$ex);
+            throw new \Exception("Can not get hosts from ".$h." | error:" . $ex);
         }
         return $urlList;
     }
 
-    function httpPostJSON($url,$data,$gzip=false)
-    {
+    /**
+     * @param $url
+     * @param $data
+     * @param bool $gzip
+     * @return mixed|null
+     * @throws \Exception
+     */
+    protected function httpPostJSON($url,$data,$gzip=false){
         if($url == null){
             $url = $this->host;
         }
@@ -109,9 +137,9 @@ Class IGeTui
                         $rep = HttpManager::httpPostJson($url, $data, $gzip);
                     }
                 }
-                catch (Exception $e)
+                catch (\Exception $e)
                 {
-                    throw new Exception("连接异常".$e);
+                    throw new \Exception("连接异常".$e);
                 }
             }
             else if('domain_error' == $rep['result'])
@@ -123,8 +151,11 @@ Class IGeTui
         return $rep;
     }
 
-    public  function connect()
-    {
+    /**
+     * @return bool
+     * @throws \Exception
+     */
+    public  function connect(){
         $timeStamp = $this->micro_time();
         // 计算sign值
         $sign = md5($this->appkey . $timeStamp . $this->masterSecret);
@@ -149,14 +180,15 @@ Class IGeTui
         $params["appkey"] = $this->appKey;
         HttpManager::httpPostJson($this->host,$params,false);
     }
-
     /**
-     *  指定用户推送消息
-     * @param  IGtMessage message
-     * @param  IGtTarget target
-     * @return Array {result:successed_offline,taskId:xxx}  || {result:successed_online,taskId:xxx} || {result:error}
-     ***/
-    public function pushMessageToSingle($message, $target, $requestId = null)
+     * 指定用户推送消息
+     * @param IGtMessage $message
+     * @param $target
+     * @param null $requestId
+     * @return mixed|null
+     * @throws \Exception
+     */
+    public function pushMessageToSingle(IGtMessage $message, $target, $requestId = null)
     {
         if($requestId == null || trim($requestId) == "")
         {
@@ -166,8 +198,13 @@ Class IGeTui
         return $this->httpPostJSON($this->host,$params);
     }
 
-
-    function getSingleMessagePostData($message, $target, $requestId = null){
+    /**
+     * @param $message
+     * @param $target
+     * @param null $requestId
+     * @return array
+     */
+    function getSingleMessagePostData($message,$target, $requestId = null){
         $params = array();
         $params["action"] = "pushMessageToSingleAction";
         $params["appkey"] = $this -> appkey;
@@ -199,10 +236,11 @@ Class IGeTui
     }
 
     /**
-     *  取消消息
-     * @param  String  contentId
-     * @return boolean
-     ***/
+     * 取消消息
+     * @param $contentId
+     * @return bool
+     * @throws \Exception
+     */
     public function cancelContentId($contentId)
     {
         $params = array();
@@ -216,10 +254,11 @@ Class IGeTui
     /**
      *  批量推送信息
      * @param  String contentId
-     * @param  Array <IGtTarget> targetList
-     * @return Array {result:successed_offline,taskId:xxx}  || {result:successed_online,taskId:xxx} || {result:error}
-     ***/
-    public function pushMessageToList($contentId, $targetList)
+     * @param  array <IGtTarget> targetList
+     * @return mixed|null
+     * @throws \Exception
+     */
+    public function pushMessageToList($contentId, $targetList=[])
     {
         $params = array();
         $params["action"] = "pushMessageToListAction";
@@ -239,7 +278,7 @@ Class IGeTui
         }
         if(count($targetList) > $limit)
         {
-            throw new Exception("target size:".count($targetList)." beyond the limit:".$limit);
+            throw new \Exception("target size:".count($targetList)." beyond the limit:".$limit);
         }
         $clientIdList = array();
         $aliasList= array();
@@ -268,6 +307,11 @@ Class IGeTui
         return $this->httpPostJSON($this->host,$params,true);
     }
 
+    /**
+     * @param $contentId
+     * @return bool
+     * @throws \Exception
+     */
     public function stop($contentId)
     {
         $params = array();
@@ -281,6 +325,12 @@ Class IGeTui
         return false;
     }
 
+    /**
+     * @param $appId
+     * @param $clientId
+     * @return mixed|null
+     * @throws \Exception
+     */
     public function getClientIdStatus($appId, $clientId)
     {
         $params = array();
@@ -291,6 +341,13 @@ Class IGeTui
         return $this->httpPostJSON($this->host, $params);
     }
 
+    /**
+     * @param $appId
+     * @param $clientId
+     * @param $tags
+     * @return mixed|null
+     * @throws \Exception
+     */
     public  function setClientTag($appId, $clientId, $tags)
     {
         $params = array();
@@ -301,13 +358,14 @@ Class IGeTui
         $params["tagList"] = $tags;
         return $this->httpPostJSON($this->host, $params);
     }
-
     /**
-     * @param \jswei\push\sdk\geTui\igetui\IGtAppMessage $message
+     * 推送APP
+     * @param IGtAppMessage $message
      * @param null $taskGroupName
      * @return mixed|null
+     * @throws \Exception
      */
-    public function pushMessageToApp($message, $taskGroupName = null)
+    public function pushMessageToApp(IGtAppMessage $message, $taskGroupName = null)
     {
         $contentId = $this->getListAppContentId($message, $taskGroupName);
         $params = array();
@@ -319,16 +377,17 @@ Class IGeTui
     }
 
     /**
-     * @param \jswei\push\sdk\geTui\igetui\IGtAppMessage $message
+     * @param IGtAppMessage $message
      * @param null $taskGroupName
      * @return mixed
+     * @throws \Exception
      */
-    private function getListAppContentId($message, $taskGroupName = null)
+    private function getListAppContentId(IGtAppMessage $message, $taskGroupName = null)
     {
         $params = array();
         if (!is_null($taskGroupName) && trim($taskGroupName) != ""){
             if(strlen($taskGroupName) > 40){
-                throw new Exception("TaskGroupName is OverLimit 40");
+                throw new \Exception("TaskGroupName is OverLimit 40");
             }
             $params["taskGroupName"] = $taskGroupName;
         }
@@ -343,7 +402,7 @@ Class IGeTui
         $params["pushType"] = $message->get_data()->get_pushType();
         $params["type"] = 2;
         //contentType 1是appMessage，2是listMessage
-        if ($message instanceof IGtListMessage){
+        if ($message instanceof \IGtListMessage){
             $params["contentType"] = 1;
         } else {
             $params["contentType"] = 2;
@@ -365,16 +424,23 @@ Class IGeTui
         {
             return $rep['contentId'];
         }else{
-            throw new Exception("host:[".$this->host."]" + "获取contentId失败:".$rep);
+            throw new \Exception("host:[".$this->host."]" + "获取contentId失败:".$rep);
         }
     }
 
     public function getBatch()
     {
-        return new IGtBatch($this->appkey,$this);
+        return new \IGtBatch($this->appkey,$this);
     }
 
-    public function pushAPNMessageToSingle($appId, $deviceToken, $message)
+    /**
+     * @param $appId
+     * @param $deviceToken
+     * @param $message
+     * @return mixed|null
+     * @throws \Exception
+     */
+    public function pushAPNMessageToSingle($appId, $deviceToken, IGtMessage $message)
     {
         $params = array();
         $params['action'] = 'apnPushToSingleAction';
@@ -390,7 +456,8 @@ Class IGeTui
      * @param $appId
      * @param $contentId
      * @param $deviceTokenList
-     * @return mixed
+     * @return mixed|null
+     * @throws \Exception
      */
     public function pushAPNMessageToList($appId, $contentId, $deviceTokenList)
     {
@@ -404,11 +471,13 @@ Class IGeTui
         $params["needDetails"]=$needDetails;
         return $this->httpPostJSON($this->host,$params);
     }
+
     /**
      * 获取apn contentId
      * @param $appId
      * @param $message
-     * @return string
+     * @return mixed
+     * @throws \Exception
      */
     public function getAPNContentId($appId, $message)
     {
@@ -421,10 +490,18 @@ Class IGeTui
         if($rep['result'] == 'ok'){
             return $rep['contentId'];
         }else{
-            throw new Exception("host:[".$this->host."]" + "获取contentId失败:".$rep);
+            throw new \Exception("host:[".$this->host."]" + "获取contentId失败:".$rep);
         }
     }
 
+    /**
+     * 绑定别名
+     * @param $appId
+     * @param $alias
+     * @param $clientId
+     * @return mixed|null
+     * @throws \Exception
+     */
     public function bindAlias($appId, $alias, $clientId)
     {
         $params = array();
@@ -436,6 +513,12 @@ Class IGeTui
         return $this->httpPostJSON($this->host,$params);
     }
 
+    /**
+     * @param $appId
+     * @param $targetList
+     * @return mixed|null
+     * @throws \Exception
+     */
     public function bindAliasBatch($appId, $targetList)
     {
         $params = array();
@@ -453,8 +536,13 @@ Class IGeTui
         return $this->httpPostJSON($this->host,$params);
     }
 
-    public function queryClientId($appId, $alias)
-    {
+    /**
+     * @param $appId
+     * @param $alias
+     * @return mixed|null
+     * @throws \Exception
+     */
+    public function queryClientId($appId, $alias){
         $params = array();
         $params["action"] = "alias_query";
         $params["appkey"] = $this->appkey;
@@ -463,6 +551,12 @@ Class IGeTui
         return $this->httpPostJSON($this->host, $params);
     }
 
+    /**
+     * @param $appId
+     * @param $clientId
+     * @return mixed|null
+     * @throws \Exception
+     */
     public function queryAlias($appId, $clientId)
     {
         $params = array();
@@ -473,6 +567,13 @@ Class IGeTui
         return $this->httpPostJSON($this->host, $params);
     }
 
+    /**
+     * @param $appId
+     * @param $alias
+     * @param null $clientId
+     * @return mixed|null
+     * @throws \Exception
+     */
     public function unBindAlias($appId, $alias, $clientId=null)
     {
         $params = array();
@@ -487,11 +588,22 @@ Class IGeTui
         return $this->httpPostJSON($this->host, $params);
     }
 
+    /**
+     * @param $appId
+     * @param $alias
+     * @return mixed|null
+     * @throws \Exception
+     */
     public function unBindAliasAll($appId, $alias)
     {
         return $this->unBindAlias($appId, $alias);
     }
 
+    /**
+     * @param $taskId
+     * @return mixed|null
+     * @throws \Exception
+     */
     public function getPushResult( $taskId) {
         $params = array();
         $params["action"] = "getPushMsgResult";
@@ -503,7 +615,13 @@ Class IGeTui
 	public function getPushResultByTaskidList( $taskIdList) {
 		return $this->getPushActionResultByTaskids($taskIdList, null);
 	}
-	
+
+    /**
+     * @param $taskIdList
+     * @param $actionIdList
+     * @return mixed|null
+     * @throws \Exception
+     */
 	public function getPushActionResultByTaskids( $taskIdList, $actionIdList) {
         $params = array();
         $params["action"] = "getPushMsgResultByTaskidList";
@@ -513,6 +631,12 @@ Class IGeTui
         return $this->httpPostJson($this->host, $params);
     }
 
+    /**
+     * @param $appId
+     * @param $clientId
+     * @return mixed|null
+     * @throws \Exception
+     */
     public function getUserTags($appId, $clientId) {
         $params = array();
         $params["action"] = "getUserTags";
@@ -522,6 +646,12 @@ Class IGeTui
         return $this->httpPostJson($this->host, $params);
     }
 
+    /**
+     * @param $appId
+     * @param $tagList
+     * @return mixed|null
+     * @throws \Exception
+     */
     public function getUserCountByTags($appId, $tagList) {
         $params = array();
         $params["action"] = "getUserCountByTags";
@@ -530,11 +660,16 @@ Class IGeTui
         $params["tagList"] = $tagList;
         $limit = GTConfig::getTagListLimit();
         if(count($tagList) > $limit) {
-            throw new Exception("tagList size:".count($tagList)." beyond the limit:".$limit);
+            throw new \Exception("tagList size:".count($tagList)." beyond the limit:".$limit);
         }
         return $this->httpPostJSON($this->host, $params);
     }
 
+    /**
+     * @param $appId
+     * @return mixed|null
+     * @throws \Exception
+     */
     public function getPersonaTags($appId) {
         $params = array();
         $params["action"] = "getPersonaTags";
@@ -544,9 +679,15 @@ Class IGeTui
         return $this->httpPostJSON($this->host, $params);
     }
 
+    /**
+     * @param $appId
+     * @param $date
+     * @return mixed|null
+     * @throws \Exception
+     */
     public function queryAppPushDataByDate($appId, $date){
         if(!LangUtils::validateDate($date)){
-            throw new Exception("DateError|".$date);
+            throw new \Exception("DateError|".$date);
         }
         $params = array();
         $params["action"] = "queryAppPushData";
@@ -556,9 +697,15 @@ Class IGeTui
         return $this->httpPostJson($this->host, $params);
     }
 
+    /**
+     * @param $appId
+     * @param $date
+     * @return mixed|null
+     * @throws \Exception
+     */
     public function queryAppUserDataByDate($appId, $date){
         if(!LangUtils::validateDate($date)){
-            throw new Exception("DateError|".$date);
+            throw new \Exception("DateError|".$date);
         }
         $params = array();
         $params["action"] = "queryAppUserData";
@@ -568,6 +715,12 @@ Class IGeTui
         return $this->httpPostJson($this->host, $params);
     }
 
+    /**
+     * @param $appId
+     * @param $appConditions
+     * @return mixed|null
+     * @throws \Exception
+     */
     public function queryUserCount($appId, $appConditions) {
         $params = array();
         $params["action"] = "queryUserCount";
@@ -579,6 +732,12 @@ Class IGeTui
         return $this->httpPostJson($this->host, $params);
     }
 
+    /**
+     * @param $message
+     * @param null $requestId
+     * @return array|mixed|null
+     * @throws \Exception
+     */
     public function pushTagMessage($message, $requestId = null) {
         if(!$message instanceof IGtTagMessage) {
             return $this->get_result("MsgTypeError");

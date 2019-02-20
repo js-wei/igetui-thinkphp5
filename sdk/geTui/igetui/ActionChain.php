@@ -6,7 +6,7 @@
  * Time: 1:53
  */
 
-namespace jswei\push\sdk\geTui\igetui;
+namespace jswei\push\sdk\geTui\IGTui;
 
 use jswei\push\sdk\geTui\protobuf\PBMessage;
 use jswei\push\sdk\geTui\protobuf\type\PBBool;
@@ -19,7 +19,7 @@ class ActionChain extends PBMessage
         parent::__construct($reader);
         $this->fields['1'] = '\jswei\push\sdk\geTui\protobuf\type\PBInt';
         $this->values['1'] = '';
-        $this->fields['2'] = '\jswei\push\sdk\geTui\igetui\ActionChain_Type';
+        $this->fields['2'] = '\jswei\push\sdk\geTui\IGTui\ActionChain_Type';
         $this->values['2'] = '';
         $this->fields['3'] = '\jswei\push\sdk\geTui\protobuf\type\PBInt';
         $this->values['3'] = '';
@@ -45,7 +45,7 @@ class ActionChain extends PBMessage
         $this->values['121'] = array();
         $this->fields['140'] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values['140'] = '';
-        $this->fields['141'] = '\jswei\push\sdk\geTui\igetui\AppStartUp';
+        $this->fields['141'] = '\jswei\push\sdk\geTui\IGTui\AppStartUp';
         $this->values['141'] = '';
         $this->fields['142'] = '\jswei\push\sdk\geTui\protobuf\type\PBBool';
         $this->values['142'] = '';
@@ -101,7 +101,7 @@ class ActionChain extends PBMessage
         $this->values['360'] = '';
         $this->fields['380'] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values['380'] = '';
-        $this->fields['381'] = '\jswei\push\sdk\geTui\igetui\InnerFiled';
+        $this->fields['381'] = '\jswei\push\sdk\geTui\IGTui\InnerFiled';
         $this->values['381'] = array();
     }
     function actionId()

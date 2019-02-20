@@ -1,6 +1,11 @@
 <?php
 
-namespace jswei\push\sdk\geTui\igetui\template;
+namespace jswei\push\sdk\geTui\IGTui\template;
+
+use jswei\push\sdk\geTui\IGTui\ActionChain;
+use jswei\push\sdk\geTui\IGTui\ActionChain_Type;
+use jswei\push\sdk\geTui\IGTui\AppStartUp;
+use jswei\push\sdk\geTui\IGTui\NotifyInfo;
 
 class IGtTransmissionTemplate extends IGtBaseTemplate {
 
@@ -10,14 +15,11 @@ class IGtTransmissionTemplate extends IGtBaseTemplate {
 	public function  getActionChain() {
 
 		$actionChains = array();
-
-	
 		// 设置actionChain
 		$actionChain1 = new ActionChain();
 		$actionChain1->set_actionId(1);
 		$actionChain1->set_type(ActionChain_Type::refer);
 		$actionChain1->set_next(10030);
-	
 		//appStartUp
 		$appStartUp = new AppStartUp();
  		$appStartUp->set_android("");
@@ -62,15 +64,19 @@ class IGtTransmissionTemplate extends IGtBaseTemplate {
 		$this->transmissionContent = $transmissionContent;
 	}
 
-    function set3rdNotifyInfo($notify) {
+    /**
+     * @param \IGtNotify $notify
+     * @throws \Exception
+     */
+    function set3rdNotifyInfo(\IGtNotify $notify) {
         if ($notify->get_title() == null || $notify -> get_content() == null) {
-            throw new Exception("notify title or content cannot be null");
+            throw new \Exception("notify title or content cannot be null");
         }
 
         $notifyInfo = new NotifyInfo();
-        $notifyInfo -> set_title($notify -> get_title());
-        $notifyInfo -> set_content($notify -> get_content());
-        $notifyInfo -> set_payload($notify -> get_payload());
+        $notifyInfo -> set_title($notify->get_title());
+        $notifyInfo -> set_content($notify->get_content());
+        $notifyInfo -> set_payload($notify->get_payload());
 
         $pushInfo = $this-> get_pushInfo();
         $pushInfo -> set_notifyInfo($notifyInfo);

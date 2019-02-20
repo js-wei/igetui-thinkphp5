@@ -1,7 +1,5 @@
 <?php
-namespace jswei\push\sdk\geTui\igetui;
-
-header("Content-Type: text/html; charset=utf-8");
+namespace jswei\push\sdk\geTui\IGTui;
 
 class IGtTagMessage extends IGtMessage{
 
