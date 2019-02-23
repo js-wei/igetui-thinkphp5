@@ -2,6 +2,10 @@
 
 namespace jswei\push\sdk\geTui\igetui\template;
 
+use jswei\push\sdk\geTui\igetui\ActionChain;
+use jswei\push\sdk\geTui\igetui\InnerFiled;
+use jswei\push\sdk\geTui\igetui\InnerFiled_Type;
+
 class IGtStartActivityTemplate extends IGtBaseTemplate
 {
     var $intent;

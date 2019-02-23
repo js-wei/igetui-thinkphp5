@@ -15,19 +15,19 @@ class OSMessage extends PBMessage
     public function __construct($reader=null)
     {
         parent::__construct($reader);
-        $this->fields["2"] = "PBBool";
+        $this->fields["2"] = '\jswei\push\sdk\geTui\protobuf\type\PBBool';
         $this->values["2"] = "";
-        $this->fields["3"] = "PBInt";
+        $this->fields["3"] = '\jswei\push\sdk\geTui\protobuf\type\PBInt';
         $this->values["3"] = "";
         $this->fields["4"] = "Transparent";
         $this->values["4"] = "";
-        $this->fields["5"] = "PBString";
+        $this->fields["5"] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values["5"] = "";
-        $this->fields["6"] = "PBInt";
+        $this->fields["6"] = '\jswei\push\sdk\geTui\protobuf\type\PBInt';
         $this->values["6"] = "";
-        $this->fields["7"] = "PBInt";
+        $this->fields["7"] = '\jswei\push\sdk\geTui\protobuf\type\PBInt';
         $this->values["7"] = "";
-        $this->fields["8"] = "PBInt";
+        $this->fields["8"] = '\jswei\push\sdk\geTui\protobuf\type\PBInt';
         $this->values["8"] = "";
     }
     function isOffline()

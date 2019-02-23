@@ -4,6 +4,10 @@
  */
 namespace jswei\push\sdk\geTui;
 
+use jswei\push\sdk\geTui\igetui\utils\ApiUrlRespectUtils;
+use jswei\push\sdk\geTui\igetui\utils\GTConfig;
+use jswei\push\sdk\geTui\igetui\utils\HttpManager;
+
 Class IGeTui
 {
     var $appkey; //第三方 标识
@@ -130,7 +134,7 @@ Class IGeTui
         // 计算sign值
         $sign = md5($this->appkey . $timeStamp . $this->masterSecret);
         //
-        var_dump($sign);
+        ////var_dump($sign);
         $params = array();
 
         $params["action"] = "connect";
@@ -697,7 +701,7 @@ Class IGeTui
         $params["appId"] = $appId;
         $params["appkey"] = $this->appkey;
         $params["taskId"] = $taskId;
-        var_dump($this->host);
+        //var_dump($this->host);
 
         return $this->httpPostJSON($this->host, $params);
 

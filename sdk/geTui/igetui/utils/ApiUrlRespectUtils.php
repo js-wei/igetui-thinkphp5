@@ -1,11 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Administrator
- * Date: 15-5-7
- * Time: 下午2:15
- */
- require_once(dirname(__FILE__) . '/' . 'HttpManager.php');
+namespace jswei\push\sdk\geTui\igetui\utils;
+
 class ApiUrlRespectUtils
 {
     static $appkeyAndFasterHost = array();

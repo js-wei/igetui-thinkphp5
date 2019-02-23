@@ -15,19 +15,19 @@ class SmsInfo extends PBMessage
     public function __construct($reader=null)
     {
         parent::__construct($reader);
-        $this->fields["1"] = "PBString";
+        $this->fields["1"] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values["1"] = "";
         $this->fields["2"] = "SmsContentEntry";
         $this->values["2"] = array();
-        $this->fields["3"] = "PBInt";
+        $this->fields["3"] = '\jswei\push\sdk\geTui\protobuf\type\PBInt';
         $this->values["3"] = "";
-        $this->fields["4"] = "PBInt";
+        $this->fields["4"] = '\jswei\push\sdk\geTui\protobuf\type\PBInt';
         $this->values["4"] = "";
-        $this->fields["5"] = "PBBool";
+        $this->fields["5"] = '\jswei\push\sdk\geTui\protobuf\type\PBBool';
         $this->values["5"] = "";
         $this->values["5"] = new PBBool();
         $this->values["5"]->value = false;
-        $this->fields["6"] = "PBString";
+        $this->fields["6"] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values["6"] = "";
     }
     function smsTemplateId()

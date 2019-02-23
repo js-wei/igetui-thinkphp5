@@ -124,6 +124,33 @@ $push->sendOneAndroid('设备码');
 $push->sendOneIOS('设备码');
 
 ```
+```php
+$igt = new GeTuiService($config);
+$igt->setLogo('https://gitee.com/uploads/69/144269_jswei.png?'.time());
+$igt->setTitle('测试通知');
+$igt->setBody('测试的通知他');
+//在notifyInfo或者transmission模板时显示透传信息
+$igt->setExtendedData(['title'=>'a new','content'=>'this is a text']);
+//链接模板必填
+$igt->setLinkUrl('http://baidu.com');
+//设置通知模板
+//IGtTemplateTye::notifyInfo  打开app当setExtendedData时候透传信息
+//IGtTemplateTye::link 链接模板
+//IGtTemplateTye::transmission 透传模板
+//IGtTemplateTye::download 下载模板
+$igt->setTemplateType(IGtTemplateTye::download);
+//下载模板专属配置
+$igt->setNotyTitle('下载模板');
+$igt->setNotyContent('下载模板');
+$igt->setNotyIcon('https://gitee.com/uploads/69/144269_jswei.png?'.time());
+$igt->setPopTitle('下载模板弹出标题');
+$igt->setPopContent('下载模板弹出内容');
+$igt->setPopImage('https://gitee.com/uploads/69/144269_jswei.png?1418807117');
+$igt->setLoadIcon('https://gitee.com/uploads/69/144269_jswei.png?1418807117');
+$igt->setLoadTitle('下载模板加载标题');
+$igt->setLoadUrl('https://pecl.php.net/get/redis-4.2.0.tgz');
+$res = $igt->sendAllAndroid()->getResult()
+```
 
 ## 透传消息（自定义消息通知）
 

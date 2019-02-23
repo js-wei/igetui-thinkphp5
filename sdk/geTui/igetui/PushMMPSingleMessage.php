@@ -15,13 +15,13 @@ class PushMMPSingleMessage extends PBMessage
     public function __construct($reader=null)
     {
         parent::__construct($reader);
-        $this->fields["1"] = "PBString";
+        $this->fields["1"] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values["1"] = "";
         $this->fields["2"] = "MMPMessage";
         $this->values["2"] = "";
         $this->fields["3"] = "Target";
         $this->values["3"] = "";
-        $this->fields["4"] = "PBString";
+        $this->fields["4"] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values["4"] = "";
     }
     function seqId()

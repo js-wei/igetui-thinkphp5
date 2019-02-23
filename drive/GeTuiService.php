@@ -182,35 +182,35 @@ class GeTuiService extends BasePush implements PushInterface
             case 2:
                 $template =  new IGtLinkTemplate();
                 if(!$this->linkUrl){
-                    throw new Exception('Link linkUrl not be empty!');
+                    throw Exception('Link linkUrl not be empty!');
                 }
                 $template->set_url($this->linkUrl);
                 break;
             case 3:
                 $template =  new IGtNotyPopLoadTemplate();
                 if(!$this->notyTitle){
-                    throw new \Exception('PopLoad notyTitle not be empty!');
+                    throw  Exception('PopLoad notyTitle not be empty!');
                 }
                 if(!$this->notyContent){
-                    throw new Exception('PopLoad notyContent not be empty!');
+                    throw  Exception('PopLoad notyContent not be empty!');
                 }
                 if(!$this->notyIcon){
-                    throw new Exception('PopLoad notyIcon not be empty!');
+                    throw  Exception('PopLoad notyIcon not be empty!');
                 }
                 if(!$this->popContent){
-                    throw new Exception('PopLoad popContent not be empty!');
+                    throw  Exception('PopLoad popContent not be empty!');
                 }
                 if(!$this->popImage){
                     throw new Exception('PopLoad popImage not be empty!');
                 }
                 if(!$this->loadIcon){
-                    throw new Exception('PopLoad loadIcon not be empty!');
+                    throw Exception('PopLoad loadIcon not be empty!');
                 }
                 if(!$this->loadTitle){
-                    throw new Exception('PopLoad loadTitle not be empty!');
+                    throw Exception('PopLoad loadTitle not be empty!');
                 }
                 if(!$this->loadUrl){
-                    throw new Exception('PopLoad loadUrl not be empty!');
+                    throw Exception('PopLoad loadUrl not be empty!');
                 }
                 //通知栏
                 $template ->set_notyTitle($this->notyTitle);                 //通知栏标题

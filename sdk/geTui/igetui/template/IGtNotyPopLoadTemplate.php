@@ -2,6 +2,13 @@
 
 namespace jswei\push\sdk\geTui\igetui\template;
 
+use jswei\push\sdk\geTui\igetui\ActionChain;
+use jswei\push\sdk\geTui\igetui\ActionChain_Type;
+use jswei\push\sdk\geTui\igetui\AppStartUp;
+use jswei\push\sdk\geTui\igetui\Button;
+use jswei\push\sdk\geTui\igetui\InnerFiled;
+use jswei\push\sdk\geTui\igetui\InnerFiled_Type;
+
 class IGtNotyPopLoadTemplate extends IGtBaseTemplate {
 	/**
 	 * 通知栏图标

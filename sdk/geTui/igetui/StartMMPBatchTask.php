@@ -17,11 +17,11 @@ class StartMMPBatchTask extends PBMessage
         parent::__construct($reader);
         $this->fields["1"] = "MMPMessage";
         $this->values["1"] = "";
-        $this->fields["2"] = "PBInt";
+        $this->fields["2"] = '\jswei\push\sdk\geTui\protobuf\type\PBInt';
         $this->values["2"] = "";
-        $this->fields["3"] = "PBString";
+        $this->fields["3"] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values["3"] = "";
-        $this->fields["4"] = "PBString";
+        $this->fields["4"] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values["4"] = "";
     }
     function message()

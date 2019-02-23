@@ -16,11 +16,11 @@ class InnerFiled extends PBMessage
     public function __construct($reader=null)
     {
         parent::__construct($reader);
-        $this->fields["1"] = "PBString";
+        $this->fields["1"] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values["1"] = "";
-        $this->fields["2"] = "PBString";
+        $this->fields["2"] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values["2"] = "";
-        $this->fields["3"] = "InnerFiled_Type";
+        $this->fields["3"] = "\jswei\push\sdk\geTui\igetui\InnerFiled_Type";
         $this->values["3"] = "";
     }
     function key()

@@ -16,9 +16,9 @@ class ReqServList extends PBMessage
     public function __construct($reader=null)
     {
         parent::__construct($reader);
-        $this->fields["1"] = "PBString";
+        $this->fields["1"] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values["1"] = "";
-        $this->fields["2"] = "PBInt";
+        $this->fields["2"] = '\jswei\push\sdk\geTui\protobuf\type\PBInt';
         $this->values["2"] = "";
     }
     function seqId()

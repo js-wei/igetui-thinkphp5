@@ -15,7 +15,7 @@ class SingleBatchRequest extends PBMessage
     public function __construct($reader=null)
     {
         parent::__construct($reader);
-        $this->fields["1"] = "PBString";
+        $this->fields["1"] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values["1"] = "";
         $this->fields["2"] = "SingleBatchItem";
         $this->values["2"] = array();

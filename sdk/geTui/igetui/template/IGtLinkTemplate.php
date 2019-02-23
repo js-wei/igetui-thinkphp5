@@ -1,6 +1,11 @@
 <?php
 namespace jswei\push\sdk\geTui\igetui\template;
 
+use jswei\push\sdk\geTui\igetui\ActionChain;
+use jswei\push\sdk\geTui\igetui\ActionChain_Type;
+use jswei\push\sdk\geTui\igetui\InnerFiled;
+use jswei\push\sdk\geTui\igetui\InnerFiled_Type;
+
 class IGtLinkTemplate extends IGtBaseTemplate {
 
 	/**
@@ -48,7 +53,6 @@ class IGtLinkTemplate extends IGtBaseTemplate {
 	public function  getActionChain() {
 
 		$actionChains = array();
-		
 		// 设置actionChain
 		$actionChain1 = new ActionChain();
 		$actionChain1->set_actionId(1);

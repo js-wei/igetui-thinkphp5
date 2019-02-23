@@ -1,6 +1,12 @@
 <?php
 namespace jswei\push\sdk\geTui\igetui\template;
 
+use jswei\push\sdk\geTui\igetui\ActionChain;
+use jswei\push\sdk\geTui\igetui\ActionChain_Type;
+use jswei\push\sdk\geTui\igetui\AppStartUp;
+use jswei\push\sdk\geTui\igetui\InnerFiled;
+use jswei\push\sdk\geTui\igetui\InnerFiled_Type;
+
 class IGtNotificationTemplate extends IGtBaseTemplate {
 
 	var $text;
@@ -24,7 +30,6 @@ class IGtNotificationTemplate extends IGtBaseTemplate {
 		$actionChain1->set_actionId(1);
 		$actionChain1->set_type(ActionChain_Type::refer);
 		$actionChain1->set_next(10000);
-		
 		//通知
 		$actionChain2 = new ActionChain();
 		$actionChain2->set_actionId(10000);

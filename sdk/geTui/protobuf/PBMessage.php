@@ -1,5 +1,7 @@
 <?php
 namespace jswei\push\sdk\geTui\protobuf;
+use jswei\push\sdk\geTui\protobuf\encoding\base128varint;
+
 /**
  * Abstract Message class
  * @author Nikolai Kordulla

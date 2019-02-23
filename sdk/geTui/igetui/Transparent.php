@@ -15,29 +15,29 @@ class Transparent extends PBMessage
     public function __construct($reader=null)
     {
         parent::__construct($reader);
-        $this->fields["1"] = "PBString";
+        $this->fields["1"] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values["1"] = "";
-        $this->fields["2"] = "PBString";
+        $this->fields["2"] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values["2"] = "";
-        $this->fields["3"] = "PBString";
+        $this->fields["3"] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values["3"] = "";
-        $this->fields["4"] = "PBString";
+        $this->fields["4"] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values["4"] = "";
-        $this->fields["5"] = "PBString";
+        $this->fields["5"] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values["5"] = "";
-        $this->fields["6"] = "PBString";
+        $this->fields["6"] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values["6"] = "";
-        $this->fields["7"] = "PushInfo";
+        $this->fields["7"] = "\jswei\push\sdk\geTui\igetui\PushInfo";
         $this->values["7"] = "";
-        $this->fields["8"] = "ActionChain";
+        $this->fields["8"] = "\jswei\push\sdk\geTui\igetui\ActionChain";
         $this->values["8"] = array();
-        $this->fields["9"] = "PBString";
+        $this->fields["9"] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values["9"] = array();
-        $this->fields["10"] = "PBInt";
+        $this->fields["10"] = '\jswei\push\sdk\geTui\protobuf\type\PBInt';
         $this->values["10"] = "";
-        $this->fields["11"] = "PBString";
+        $this->fields["11"] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values["11"] = "";
-        $this->fields["12"] = "SmsInfo";
+        $this->fields["12"] = "\jswei\push\sdk\geTui\igetui\SmsInfo";
         $this->values["12"] = "";
     }
     function id()

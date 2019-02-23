@@ -18,19 +18,19 @@ class PushResult extends PBMessage
         parent::__construct($reader);
         $this->fields["1"] = "PushResult_EPushResult";
         $this->values["1"] = "";
-        $this->fields["2"] = "PBString";
+        $this->fields["2"] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values["2"] = "";
-        $this->fields["3"] = "PBString";
+        $this->fields["3"] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values["3"] = "";
-        $this->fields["4"] = "PBString";
+        $this->fields["4"] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values["4"] = "";
-        $this->fields["5"] = "PBString";
+        $this->fields["5"] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values["5"] = "";
-        $this->fields["6"] = "PBString";
+        $this->fields["6"] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values["6"] = "";
-        $this->fields["7"] = "PBString";
+        $this->fields["7"] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values["7"] = "";
-        $this->fields["8"] = "PBString";
+        $this->fields["8"] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values["8"] = "";
     }
     function result()
