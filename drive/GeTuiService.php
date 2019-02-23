@@ -58,7 +58,9 @@ class GeTuiService extends BasePush implements PushInterface
         $this->igt = new IGeTui(self::HOST, $this->AppKey, $this->MasterSecret);
 
     }
-
+    public function getIGeTui(){
+        return $this->igt;
+    }
     public function setConfig($config)
     {
         $this->config = $config;
@@ -212,6 +214,7 @@ class GeTuiService extends BasePush implements PushInterface
     {
         return $this->result;
     }
+
     public function getCurrentTemplate(){
         return $this->getTemplate();
     }
