@@ -4,9 +4,11 @@
  */
 namespace jswei\push\sdk\geTui;
 
+use jswei\push\sdk\geTui\igetui\IGtListMessage;
 use jswei\push\sdk\geTui\igetui\utils\ApiUrlRespectUtils;
 use jswei\push\sdk\geTui\igetui\utils\GTConfig;
 use jswei\push\sdk\geTui\igetui\utils\HttpManager;
+use jswei\push\sdk\geTui\igetui\utils\LangUtils;
 
 Class IGeTui
 {
@@ -436,7 +438,7 @@ Class IGeTui
         {
             return $rep['contentId'];
         }else{
-            throw new Exception("host:[".$this->host."]" + "获取contentId失败:" . $rep);
+            throw Exception("host:[".$this->host."]" + "获取contentId失败:" . $rep);
         }
     }
 
@@ -492,7 +494,7 @@ Class IGeTui
         if($rep['result'] == 'ok'){
             return $rep['contentId'];
         }else{
-            throw new Exception("host:[".$this->host."]" + "获取contentId失败:".$rep);
+            throw Exception("host:[".$this->host."]" + "获取contentId失败:".$rep);
         }
     }
 
@@ -620,7 +622,7 @@ Class IGeTui
         $params["tagList"] = $tagList;
         $limit = GTConfig::getTagListLimit();
         if(count($tagList) > $limit) {
-            throw new Exception("tagList size:".count($tagList)." beyond the limit:".$limit);
+            throw Exception("tagList size:".count($tagList)." beyond the limit:".$limit);
         }
         return $this->httpPostJSON($this->host, $params);
     }

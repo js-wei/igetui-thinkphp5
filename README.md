@@ -153,11 +153,45 @@ $igt->setLoadTitle('下载模板加载标题');
 $igt->setLoadUrl('https://pecl.php.net/get/redis-4.2.0.tgz');
 $res = $igt->sendAllAndroid()->getResult()
 ```
+## 下面的示例（向指定用户推送）
+```php
+public function push()
+{
+    $config = config('getui.');
+    $push = new GeTuiService($config);
+    $push->setLogoURL('https://gitee.com/uploads/69/144269_jswei.png');
+    $push->setTitle('测试通知');
+    $push->setBody('测试的通知他');
+    $push->setLinkUrl('http://baidu.com');
+    //设置通知模板
+    //IGtTemplateTye::notifyInfo  打开app当setExtendedData时候透传信息
+    //IGtTemplateTye::link 链接模板
+    //IGtTemplateTye::transmission 透传模板
+    //IGtTemplateTye::download 下载模板
+    $push->setTemplateType(IGtTemplateTye::link);
+    //实现的方法
+    /*
+     $push->sendAllAndroid();     //向所有安卓平台发送
+     $push->sendAllIOS();        //向所有苹果平台发送
+     $push->sendAll();           //向所有平台发送
+     $push->sendOne('client_id1'); //单台设备发送
+     $push->sendToUserList('');  //向指定用户列表发送['client_id1','client_id2'...]
 
-## 透传消息（自定义消息通知）
-
-如无说明，默认都是透传消息。
-
-其中友盟的安卓手机通知会发送两次通知，一次是消息通知，一次为透传通知
-
-其中个推只要设置了扩展参数，就会发送透传消息，否则为默认通知。
+    //其他的一些可以获取个推对象和模板进行操作更多的操作
+    // 获取个推对象实例
+    //$igeTui = $push->getIGeTui();
+    //获取消息模板
+    $template = $push->getCurrentTemplate();*/
+    return $push->sendToUserList(['b0a1bdd6cc90e05dfa9c4104f12f175c'])->getResult();
+}
+```
+## 示例的响应信息（向指定用户推送）
+```json
+{
+  "result": "ok",
+  "contentId": "OSL-0223_BwEXmU9cAI8SpXGG39UTz6",
+  "details": {
+    "b0a1bdd6cc90e05dfa9c4104f12f175c": "successed_offline"
+  }
+}
+```
