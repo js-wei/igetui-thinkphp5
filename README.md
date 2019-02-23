@@ -125,6 +125,8 @@ $push->sendOneIOS('设备码');
 
 ```
 ```php
+//下面是最新的用例
+$config = config('getui.');
 $igt = new GeTuiService($config);
 $igt->setLogo('https://gitee.com/uploads/69/144269_jswei.png?'.time());
 $igt->setTitle('测试通知');
