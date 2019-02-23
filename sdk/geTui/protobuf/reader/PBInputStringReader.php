@@ -1,4 +1,6 @@
 <?php
+namespace jswei\push\sdk\geTui\protobuf\reader;
+
 /**
  * Reads string input
  */

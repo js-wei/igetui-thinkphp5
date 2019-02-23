@@ -1,12 +1,12 @@
 <?php
-/**
- * @author Nikolai Kordulla
- */
-
 namespace jswei\push\sdk\geTui\protobuf\type;
 
 use jswei\push\sdk\geTui\protobuf\PBMessage;
-class PBScalar extends \jswei\push\sdk\geTui\protobuf\PBMessage
+
+/**
+ * @author Nikolai Kordulla
+ */
+class PBScalar extends PBMessage
 {
 	/**
 	 * Set scalar value

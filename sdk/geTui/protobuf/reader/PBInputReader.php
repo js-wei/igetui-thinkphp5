@@ -1,4 +1,8 @@
 <?php
+namespace jswei\push\sdk\geTui\protobuf\reader;
+
+use jswei\push\sdk\geTui\protobuf\encoding\base128varint;
+
 /**
  * Abstract class for an input reader
  */

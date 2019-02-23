@@ -1,12 +1,11 @@
 <?php
-/**
- * @author Nikolai Kordulla
- */
-
 namespace jswei\push\sdk\geTui\protobuf\type;
 
 use jswei\push\sdk\geTui\protobuf\PBMessage;
 
+/**
+ * @author Nikolai Kordulla
+ */
 class PBInt extends PBScalar
 {
 	var $wired_type = PBMessage::WIRED_VARINT;

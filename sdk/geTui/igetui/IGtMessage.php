@@ -1,7 +1,5 @@
 <?php
-
-
-namespace jswei\push\sdk\geTui\IGTui;
+namespace jswei\push\sdk\geTui\igetui;
 
 class IGtMessage{
 	var  $isOffline;

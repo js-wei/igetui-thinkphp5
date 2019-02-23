@@ -1,15 +1,15 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: xing.chen
- * Date: 2018/3/17
- * Time: 2:05
+ * User: jswei
+ * Date: 2019/2/23
+ * Time: 15:07
  */
+namespace jswei\push\sdk\geTui\igetui;
 
-namespace jswei\push\sdk\geTui\IGTui;
+use jswei\push\sdk\geTui\protobuf\type\PBEnum;
 
-
-class InnerFiled_Type extends \jswei\push\sdk\geTui\protobuf\type\PBEnum
+class InnerFiled_Type extends PBEnum
 {
     const str  = 0;
     const int32  = 1;

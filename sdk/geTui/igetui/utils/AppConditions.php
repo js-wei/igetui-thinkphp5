@@ -1,11 +1,12 @@
 <?php
-namespace jswei\push\sdk\geTui\IGTui\utils;
+/**
+ * Created by PhpStorm.
+ * User: Songmh
+ * Date: 2015/9/21
+ * Time: 21:54
+ */
 
- class OptType {
-    const _OR_ = 0;
-    const _AND_ = 1;
-    const _NOT_ = 2;
- }
+namespace jswei\push\sdk\geTui\igetui\utils;
 
  class AppConditions {
  	//手机类型
@@ -18,11 +19,6 @@ namespace jswei\push\sdk\geTui\IGTui\utils;
     //条件
 	var $condition = array();
 
-     /**
-      * @param $name
-      * @param $args
-      * @return mixed
-      */
      function __call ($name, $args )
      {
          if($name=='addCondition') {
@@ -35,13 +31,7 @@ namespace jswei\push\sdk\geTui\IGTui\utils;
          }
      }
 
-     /**
-      * @param $key
-      * @param $values
-      * @param OptType $optType
-      * @return $this
-      */
-	function addCondition3($key, $values, OptType $optType) {
+	function addCondition3($key, $values, $optType=0) {
         $item = array();
         $item["key"] = $key;
         $item["values"] = $values;
@@ -50,7 +40,7 @@ namespace jswei\push\sdk\geTui\IGTui\utils;
         return $this;
     }
      function addCondition2($key, $values) {
-         return $this->addCondition3($key, $values, OptType::_OR_);
+         return $this->addCondition3($key, $values, 0);
      }
 
      function getCondition() {

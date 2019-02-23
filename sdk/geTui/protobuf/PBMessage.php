@@ -1,19 +1,9 @@
 <?php
-/**
- * Including of all files needed to parse messages
- * @author Nikolai Kordulla
- */
+namespace jswei\push\sdk\geTui\protobuf;
 /**
  * Abstract Message class
  * @author Nikolai Kordulla
  */
-
-
-namespace jswei\push\sdk\geTui\protobuf;
-
-use jswei\push\sdk\geTui\protobuf\encoding\base128varint;
-use \jswei\push\sdk\geTui\igetui\ActionChain;
-
 abstract class PBMessage
 {
     const WIRED_VARINT = 0;
@@ -264,7 +254,7 @@ abstract class PBMessage
         }
         else
         {
-            $this->values[$index] = new $this->fields[$index];
+            $this->values[$index] = new $this->fields[$index]();
             $this->values[$index]->value = $value;
         }
     }

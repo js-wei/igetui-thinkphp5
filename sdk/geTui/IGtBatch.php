@@ -5,8 +5,7 @@
  * Date: 15-4-9
  * Time: 下午3:45
  */
-header("Content-Type: text/html; charset=utf-8");
-require_once(dirname(__FILE__) . '/' . 'IGt.Push.php');
+namespace jswei\push\sdk\geTui;
 
 class IGtBatch
 {
@@ -52,7 +51,7 @@ class IGtBatch
 
     public function submit()
     {
-        $requestId = uniqid();
+        $requestId = LangUtils::randomUUID();
         $data = array();
         $data["appkey"]=$this->APPKEY;
         $data["serialize"] = "pb";

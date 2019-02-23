@@ -1,5 +1,11 @@
 <?php
-namespace jswei\push\sdk\geTui\IGTui;
+/**
+ * Created by PhpStorm.
+ * User: jswei
+ * Date: 2019/2/23
+ * Time: 15:07
+ */
+namespace jswei\push\sdk\geTui\igetui;
 
 use jswei\push\sdk\geTui\protobuf\PBMessage;
 
@@ -9,143 +15,153 @@ class Transparent extends PBMessage
     public function __construct($reader=null)
     {
         parent::__construct($reader);
-        $this->fields['1'] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
-        $this->values['1'] = '';
-        $this->fields['2'] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
-        $this->values['2'] = '';
-        $this->fields['3'] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
-        $this->values['3'] = '';
-        $this->fields['4'] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
-        $this->values['4'] = '';
-        $this->fields['5'] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
-        $this->values['5'] = '';
-        $this->fields['6'] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
-        $this->values['6'] = '';
-        $this->fields['7'] = '\jswei\push\sdk\geTui\protobuf\type\PushInfo';
-        $this->values['7'] = '';
-        $this->fields['8'] = '\jswei\push\sdk\geTui\IGTui\ActionChain';
-        $this->values['8'] = array();
-        $this->fields['9'] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
-        $this->values['9'] = array();
-        $this->fields['10'] = '\jswei\push\sdk\geTui\protobuf\type\PBInt';
-        $this->values['10'] = '';
-        $this->fields['11'] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
-        $this->values['11'] = '';
+        $this->fields["1"] = "PBString";
+        $this->values["1"] = "";
+        $this->fields["2"] = "PBString";
+        $this->values["2"] = "";
+        $this->fields["3"] = "PBString";
+        $this->values["3"] = "";
+        $this->fields["4"] = "PBString";
+        $this->values["4"] = "";
+        $this->fields["5"] = "PBString";
+        $this->values["5"] = "";
+        $this->fields["6"] = "PBString";
+        $this->values["6"] = "";
+        $this->fields["7"] = "PushInfo";
+        $this->values["7"] = "";
+        $this->fields["8"] = "ActionChain";
+        $this->values["8"] = array();
+        $this->fields["9"] = "PBString";
+        $this->values["9"] = array();
+        $this->fields["10"] = "PBInt";
+        $this->values["10"] = "";
+        $this->fields["11"] = "PBString";
+        $this->values["11"] = "";
+        $this->fields["12"] = "SmsInfo";
+        $this->values["12"] = "";
     }
     function id()
     {
-        return $this->_get_value('1');
+        return $this->_get_value("1");
     }
     function set_id($value)
     {
-        return $this->_set_value('1', $value);
+        return $this->_set_value("1", $value);
     }
     function action()
     {
-        return $this->_get_value('2');
+        return $this->_get_value("2");
     }
     function set_action($value)
     {
-        return $this->_set_value('2', $value);
+        return $this->_set_value("2", $value);
     }
     function taskId()
     {
-        return $this->_get_value('3');
+        return $this->_get_value("3");
     }
     function set_taskId($value)
     {
-        return $this->_set_value('3', $value);
+        return $this->_set_value("3", $value);
     }
     function appKey()
     {
-        return $this->_get_value('4');
+        return $this->_get_value("4");
     }
     function set_appKey($value)
     {
-        return $this->_set_value('4', $value);
+        return $this->_set_value("4", $value);
     }
     function appId()
     {
-        return $this->_get_value('5');
+        return $this->_get_value("5");
     }
     function set_appId($value)
     {
-        return $this->_set_value('5', $value);
+        return $this->_set_value("5", $value);
     }
     function messageId()
     {
-        return $this->_get_value('6');
+        return $this->_get_value("6");
     }
     function set_messageId($value)
     {
-        return $this->_set_value('6', $value);
+        return $this->_set_value("6", $value);
     }
     function pushInfo()
     {
-        return $this->_get_value('7');
+        return $this->_get_value("7");
     }
     function set_pushInfo($value)
     {
-        return $this->_set_value('7', $value);
+        return $this->_set_value("7", $value);
     }
     function actionChain($offset)
     {
-        return $this->_get_arr_value('8', $offset);
+        return $this->_get_arr_value("8", $offset);
     }
     function add_actionChain()
     {
-        return $this->_add_arr_value('8');
+        return $this->_add_arr_value("8");
     }
     function set_actionChain($index, $value)
     {
-        $this->_set_arr_value('8', $index, $value);
+        $this->_set_arr_value("8", $index, $value);
     }
     function remove_last_actionChain()
     {
-        $this->_remove_last_arr_value('8');
+        $this->_remove_last_arr_value("8");
     }
     function actionChain_size()
     {
-        return $this->_get_arr_size('8');
+        return $this->_get_arr_size("8");
     }
     function condition($offset)
     {
-        $v = $this->_get_arr_value('9', $offset);
+        $v = $this->_get_arr_value("9", $offset);
         return $v->get_value();
     }
     function append_condition($value)
     {
-        $v = $this->_add_arr_value('9');
+        $v = $this->_add_arr_value("9");
         $v->set_value($value);
     }
     function set_condition($index, $value)
     {
-        $v = new $this->fields['9']();
+        $v = new $this->fields["9"]();
         $v->set_value($value);
-        $this->_set_arr_value('9', $index, $v);
+        $this->_set_arr_value("9", $index, $v);
     }
     function remove_last_condition()
     {
-        $this->_remove_last_arr_value('9');
+        $this->_remove_last_arr_value("9");
     }
     function condition_size()
     {
-        return $this->_get_arr_size('9');
+        return $this->_get_arr_size("9");
     }
     function templateId()
     {
-        return $this->_get_value('10');
+        return $this->_get_value("10");
     }
     function set_templateId($value)
     {
-        return $this->_set_value('10', $value);
+        return $this->_set_value("10", $value);
     }
     function taskGroupId()
     {
-        return $this->_get_value('11');
+        return $this->_get_value("11");
     }
     function set_taskGroupId($value)
     {
-        return $this->_set_value('11', $value);
+        return $this->_set_value("11", $value);
+    }
+    function smsInfo()
+    {
+        return $this->_get_value("12");
+    }
+    function set_smsInfo($value)
+    {
+        return $this->_set_value("12", $value);
     }
 }

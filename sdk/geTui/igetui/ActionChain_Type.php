@@ -1,17 +1,16 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: xing.chen
- * Date: 2018/3/17
- * Time: 1:58
+ * User: jswei
+ * Date: 2019/2/23
+ * Time: 15:07
  */
+namespace jswei\push\sdk\geTui\igetui;
 
-namespace jswei\push\sdk\geTui\IGTui;
 
+use jswei\push\sdk\geTui\protobuf\type\PBEnum;
 
-use jswei\push\sdk\geTui\protobuf\PBMessage;
-
-class ActionChain_Type extends \jswei\push\sdk\geTui\protobuf\type\PBEnum
+class ActionChain_Type extends PBEnum
 {
     const refer  = 0;
     const notification  = 1;

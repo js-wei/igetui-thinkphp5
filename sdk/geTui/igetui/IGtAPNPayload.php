@@ -1,6 +1,12 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: Administrator
+ * Date: 15-4-10
+ * Time: 上午11:37
+ */
 
-namespace jswei\push\sdk\geTui\IGTui;
+namespace jswei\push\sdk\geTui\igetui;
 
 class IGtAPNPayload
 {
@@ -16,6 +22,13 @@ class IGtAPNPayload
     var $category;
     var $alertMsg;
     var $multiMedias = array();
+    //语音播报支持
+    var $voicePlayType = 0;
+    var $voicePlayMessage;
+    //新增字段，跟java同步
+    var $apnsCollapseId;
+    var $autoBadge;
+
 
     public function get_payload()
     {
@@ -30,8 +43,9 @@ class IGtAPNPayload
                     $apsMap["alert"] = $msg;
                 }
             }
-
-            if ($this->badge >= 0) {
+            if($this->autoBadge != null){
+                $apsMap["autoBadge"] = $this->autoBadge;
+            }elseif($this->badge >= 0) {
                 $apsMap["badge"] = $this->badge;
             }
             if($this -> sound == null || $this->sound == '' )
@@ -43,7 +57,7 @@ class IGtAPNPayload
             }
 
             if (sizeof($apsMap) == 0) {
-                throw new \Exception("format error");
+                throw new Exception("format error");
             }
             if ($this->contentAvailable > 0) {
                 $apsMap["content-available"] = $this->contentAvailable;
@@ -59,13 +73,21 @@ class IGtAPNPayload
                 }
             }
             $map["aps"] = $apsMap;
-
+            if($this->apnsCollapseId != null){
+                $map["apns-collapse-i"] = $this->apnsCollapseId;
+            }
             if($this -> multiMedias != null && sizeof($this -> multiMedias) > 0) {
                 $map["_grinfo_"] = $this->check_multiMedias();
             }
+            if ($this->voicePlayType == 1){
+                $map["_gvp_t_"] = 1;
+            }elseif($this->voicePlayType == 2 && !empty($this->voicePlayMessage)){
+                $map["_gvp_t_"] = 2;
+                $map["_gvp_m_"] = $this->voicePlayMessage;
+            }
             return json_encode($map);
-        } catch (\Exception $e) {
-            throw new \Exception("create apn payload error", -1, $e);
+        } catch (Exception $e) {
+            throw new Exception("create apn payload error", -1, $e);
         }
     }
 
@@ -79,7 +101,7 @@ class IGtAPNPayload
     function check_multiMedias()
     {
         if(sizeof($this -> multiMedias) > 3) {
-            throw new \RuntimeException("MultiMedias size overlimit");
+            throw new RuntimeException("MultiMedias size overlimit");
         }
 
         $needGeneRid = false;
@@ -93,7 +115,7 @@ class IGtAPNPayload
             }
 
             if($media->get_type() == null || $media->get_url() == null) {
-                throw new \RuntimeException("MultiMedia resType and resUrl can't be null");
+                throw new RuntimeException("MultiMedia resType and resUrl can't be null");
             }
         }
 
@@ -119,65 +141,4 @@ class IGtAPNPayload
         return $this;
     }
 }
-interface ApnMsg
-{
-    public function get_alertMsg();
-}
 
-class DictionaryAlertMsg implements ApnMsg{
-
-    var $title;
-    var $body;
-    var $titleLocKey;
-    var $titleLocArgs = array();
-    var $actionLocKey;
-    var $locKey;
-    var $locArgs = array();
-    var $launchImage;
-
-    public function get_alertMsg() {
-
-        $alertMap = array();
-
-        if ($this->title != null && $this->title != "") {
-            $alertMap["title"] = $this->title;
-        }
-        if ($this->body != null && $this->body != "") {
-            $alertMap["body"] = $this->body;
-        }
-        if ($this->titleLocKey != null && $this->titleLocKey != "") {
-            $alertMap["title-loc-key"] = $this->titleLocKey;
-        }
-        if (sizeof($this->titleLocArgs) > 0) {
-            $alertMap["title-loc-args"] = $this->titleLocArgs;
-        }
-        if ($this->actionLocKey != null && $this->actionLocKey) {
-            $alertMap["action-loc-key"] = $this->actionLocKey;
-        }
-        if ($this->locKey != null && $this->locKey != "") {
-            $alertMap["loc-key"] = $this->locKey;
-        }
-        if (sizeof($this->locArgs) > 0) {
-            $alertMap["loc-args"] = $this->locArgs;
-        }
-        if ($this->launchImage != null && $this->launchImage != "") {
-            $alertMap["launch-image"] = $this->launchImage;
-        }
-
-        if(count($alertMap) == 0)
-        {
-            return null;
-        }
-
-        return $alertMap;
-    }
-}
-
-class SimpleAlertMsg implements ApnMsg{
-    var $alertMsg;
-
-    public function get_alertMsg() {
-        return $this->alertMsg;
-    }
-}
-?>

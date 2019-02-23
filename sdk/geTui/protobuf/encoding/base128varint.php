@@ -1,10 +1,10 @@
 <?php
+namespace jswei\push\sdk\geTui\protobuf\encoding;
 
 /**
  * Base 128 varints - decodes and encodes base128 varints to/from decimal
  * @author Nikolai Kordulla
  */
-namespace jswei\push\sdk\geTui\protobuf\encoding;
 class base128varint
 {
     // modus for output

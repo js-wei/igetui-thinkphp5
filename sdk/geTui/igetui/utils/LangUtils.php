@@ -6,7 +6,7 @@
  * Time: 上午9:36
  */
 
-namespace jswei\push\sdk\geTui\IGTui\utils;
+namespace jswei\push\sdk\geTui\igetui\utils;
 
 class LangUtils
 {

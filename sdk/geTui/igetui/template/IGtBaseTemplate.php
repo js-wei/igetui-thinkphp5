@@ -1,11 +1,10 @@
 <?php
+namespace jswei\push\sdk\geTui\igetui\template;
 
-namespace jswei\push\sdk\geTui\IGTui\template;
-
-use jswei\push\sdk\geTui\IGTui\DictionaryAlertMsg;
-use jswei\push\sdk\geTui\IGTui\IGtAPNPayload;
-use jswei\push\sdk\geTui\IGTui\Transparent;
-use jswei\push\sdk\geTui\IGTui\PushInfo;
+use jswei\push\sdk\geTui\igetui\DictionaryAlertMsg;
+use jswei\push\sdk\geTui\igetui\IGtAPNPayload;
+use jswei\push\sdk\geTui\igetui\PushInfo;
+use jswei\push\sdk\geTui\igetui\Transparent;
 
 class IGtBaseTemplate
 {
@@ -13,6 +12,7 @@ class IGtBaseTemplate
     var $appkey;
     var $pushInfo;
     var $duration;
+    var $smsInfo;
 
     function get_transparent()
     {
@@ -25,6 +25,9 @@ class IGtBaseTemplate
         $transparent->set_pushInfo($this->get_pushInfo());
         $transparent->set_appId($this->appId);
         $transparent->set_appKey($this->appkey);
+        if($this->smsInfo != null){
+            $transparent->set_smsInfo($this->smsInfo);
+        }
 
         $actionChainList = $this->getActionChain();
 
@@ -59,12 +62,9 @@ class IGtBaseTemplate
         return $this->duration;
     }
 
-    /**
-     * @param $begin
-     * @param $end
-     * @throws \Exception
-     */
-    function set_duration($begin, $end){
+    function set_duration($begin, $end)
+
+    {
         date_default_timezone_set('asia/shanghai');
         /*  //for test
             var_dump(date("Y-m-d H:i:s",strtotime($begin)));
@@ -73,9 +73,9 @@ class IGtBaseTemplate
         $ss = (string)strtotime($begin) * 1000;
         $e = (string)strtotime($end) * 1000;
         if ($ss <= 0 || $e <= 0)
-            throw new \Exception("DateFormat: yyyy-MM-dd HH:mm:ss");
+            throw new Exception("DateFormat: yyyy-MM-dd HH:mm:ss");
         if ($ss > $e)
-            throw new \Exception("startTime should be smaller than endTime");
+            throw new Exception("startTime should be smaller than endTime");
 
         $this->duration = $ss . "-" . $e;
 
@@ -107,19 +107,73 @@ class IGtBaseTemplate
         return $this->pushInfo;
     }
 
-    /**
-     * @param $actionLocKey
-     * @param $badge
-     * @param $message
-     * @param $sound
-     * @param $payload
-     * @param $locKey
-     * @param $locArgs
-     * @param $launchImage
-     * @param int $contentAvailable
-     * @throws \Exception
-     */
-    public function set_pushInfo($actionLocKey, $badge, $message, $sound, $payload, $locKey, $locArgs, $launchImage, $contentAvailable = 0)
+    function setSmsInfo($smsMessage){
+
+        if($smsMessage == null){
+            throw new RuntimeException("smsInfo cannot be empty");
+        } else {
+            $smsTemplateId = $smsMessage->getSmsTemplateId();
+            $smsContent = $smsMessage->getSmsContent();
+            $offlineSendtime = $smsMessage->getOfflineSendtime();
+            $smsSendDuration = 0;
+            if ($smsTemplateId != null || !empty($smsTemplateId)) {
+                if ($offlineSendtime == null) {
+                    throw new RuntimeException("offlineSendtime cannot be empty");
+                } else {
+                    $build = new SmsInfo();
+                    $build->set_smsChecked(false);
+                    $build->set_smsTemplateId($smsTemplateId);
+                    $build->set_offlineSendtime($offlineSendtime);
+                    if ($smsMessage->getisApplink()) {
+
+                        if ($smsContent['url'] != null) {
+                            throw new RuntimeException("SmsContent cann not contains key about url");
+                        }
+                        $smsContentEntry = new SmsContentEntry();
+                        $smsContentEntry->set_key("applinkIdentification");
+                        $smsContentEntry->set_value("1");
+                        $build->set_smsContent("applinkIdentification",$smsContentEntry);
+                        $payload = $smsMessage->getPayload();
+
+                        if ($payload != null && !empty($payload)) {
+                            $smsContentEntry = new SmsContentEntry();
+                            $smsContentEntry->set_key("url");
+                            $smsContentEntry->set_value($smsMessage->getUrl() . "?n=" . $payload . "&p=");
+                            $build->set_smsContent("url",$smsContentEntry);
+                        } else {
+                            $smsContentEntry = new SmsContentEntry();
+                            $smsContentEntry->set_key("url");
+                            $smsContentEntry->set_value($smsMessage->getUrl() . "?p=");
+                            $build->set_smsContent("url",$smsContentEntry);
+                        }
+                    }
+                    if ($smsContent != null) {
+                        foreach ($smsContent as $key => $value) {
+                            if ($key == null || empty($key) || $value == null) {
+                                throw new RuntimeException("smsContent entry cannot be null");
+                            } else {
+                                $smsContentEntry = new SmsContentEntry();
+                                $smsContentEntry->set_key($key);
+                                $smsContentEntry->set_value($value);
+                                $build->set_smsContent($key,$smsContentEntry);
+                            }
+                        }
+                    }
+                    if ($smsSendDuration != null) {
+                        $build->smsSendDuration($smsSendDuration);
+                    }
+                    $this->smsInfo = $build;
+                }
+            }
+            else {
+                    throw new RuntimeException("smsTemplateId cannot be empty");
+                }
+
+            }
+
+
+    }
+    function set_pushInfo($actionLocKey, $badge, $message, $sound, $payload, $locKey, $locArgs, $launchImage, $contentAvailable = 0)
     {
         $apn = new IGtAPNPayload();
 
@@ -166,11 +220,7 @@ class IGtBaseTemplate
         $this->set_apnInfo($apn);
     }
 
-    /**
-     * @param $payload
-     * @throws \Exception
-     */
-    public function set_apnInfo(IGtAPNPayload $payload)
+    function set_apnInfo($payload)
     {
         if ($payload == null) {
             return;
@@ -181,7 +231,7 @@ class IGtBaseTemplate
         }
         $len = strlen($payload);
         if ($len > IGtAPNPayload::$PAYLOAD_MAX_BYTES) {
-            throw new \Exception("APN payload length overlength (" . $len . ">" . IGtAPNPayload::$PAYLOAD_MAX_BYTES . ")");
+            throw new Exception("APN payload length overlength (" . $len . ">" . IGtAPNPayload::$PAYLOAD_MAX_BYTES . ")");
         }
         $pushInfo = $this->get_pushInfo();
         $pushInfo->set_apnJson($payload);
@@ -198,11 +248,8 @@ class IGtBaseTemplate
         $this->appkey = $appkey;
     }
 
-    /**
-     * @param $str
-     * @return int
-     */
-    function abslength($str){
+    function abslength($str)
+    {
         if (empty($str)) {
             return 0;
         }
@@ -229,6 +276,10 @@ class IGtBaseTemplate
         }
         if($this instanceof IGtAPNTemplate) {
             return 5;
+        }
+
+        if($this instanceof IGtStartActivityTemplate) {
+            return 7;
         }
         return -1;
     }
