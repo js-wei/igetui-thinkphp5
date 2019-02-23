@@ -1,8 +1,10 @@
 <?php
 namespace jswei\push\drive;
 
+use http\Exception;
 use jswei\push\sdk\geTui\IGeTui;
 use jswei\push\sdk\geTui\igetui\IGtAppMessage;
+use jswei\push\sdk\geTui\igetui\IGtListMessage;
 use jswei\push\sdk\geTui\igetui\IGtTemplateTye;
 use jswei\push\sdk\geTui\igetui\template\IGtLinkTemplate;
 use jswei\push\sdk\geTui\igetui\template\IGtNotificationTemplate;
@@ -79,6 +81,7 @@ class GeTuiService extends BasePush implements PushInterface
         $message->set_offlineExpireTime(10 * 60 * 1000);//离线时间单位为毫秒，例，两个小时离线为3600*1000*2
         $message->set_data($template);
         $message->setPushTime($this->pushTime);
+        $message->set_speed(100);
         $appIdList = array($this->AppID);
         $message->set_appIdList($appIdList);
         if($phoneTypeList || $provinceList || $tagList){
@@ -108,6 +111,7 @@ class GeTuiService extends BasePush implements PushInterface
         $this->sendAll(['ISO']);
         return $this;
     }
+
 
     /**
      * 单播：所有平台
@@ -150,6 +154,40 @@ class GeTuiService extends BasePush implements PushInterface
         $this->sendOne($device);
     }
 
+    /**
+     * 指定用户推送
+     * @param array $clientIdList
+     * @return $this
+     */
+    public function sendToUserList($clientIdList=[]){
+        putenv("gexin_pushList_needDetails=true");//是否开启needDetails
+        putenv("gexin_pushList_needAsync=true");//是否开启needAsync
+        $template = $this->getTemplate();
+        $message = new IGtListMessage();
+        $message->set_isOffline(true);//是否离线
+        $message->set_offlineExpireTime(3600*12*1000);//离线时间
+        $message->set_data($template);//设置推送消息类型
+        $message->set_PushNetWorkType(1);//设置是否根据WIFI推送消息，1为wifi推送，0为不限制推送
+        $contentId = $this->igt->getContentId($message);
+        if(!$clientIdList){
+            throw Exception('client_id\'s not be empty!');
+        }
+        $pushList=[];
+        foreach ($clientIdList as $v){
+            if($v){
+                $target = new IGtTarget();
+                $target->set_appId($this->AppID);
+                $target->set_clientId($v);
+                array_push($pushList,$target);
+            }
+        }
+        if(!$pushList){
+            throw Exception('client_id\'s not be empty,please confirm again.');
+        }
+        $this->result = $this->igt->pushMessageToList($contentId,$pushList);
+        return $this;
+    }
+
     // 发送组播
     public function sendGroup()
     {
@@ -173,6 +211,9 @@ class GeTuiService extends BasePush implements PushInterface
     public function getResult()
     {
         return $this->result;
+    }
+    public function getCurrentTemplate(){
+        return $this->getTemplate();
     }
 
     private function getTemplate()
@@ -201,7 +242,7 @@ class GeTuiService extends BasePush implements PushInterface
                     throw  Exception('PopLoad popContent not be empty!');
                 }
                 if(!$this->popImage){
-                    throw new Exception('PopLoad popImage not be empty!');
+                    throw Exception('PopLoad popImage not be empty!');
                 }
                 if(!$this->loadIcon){
                     throw Exception('PopLoad loadIcon not be empty!');
@@ -241,7 +282,7 @@ class GeTuiService extends BasePush implements PushInterface
                     $template->set_transmissionType(1);//透传消息类型
                     $template->set_transmissionContent($extendData);//透传内容
                 }else{
-                    throw new Exception('payload not be empty!');
+                    throw Exception('payload not be empty!');
                 }
                 break;
             case 1:
