@@ -14,6 +14,7 @@ use jswei\push\core\BasePush;
 use jswei\push\core\PushInterface;
 use jswei\push\sdk\geTui\igetui\template\IGtNotyPopLoadTemplate;
 use jswei\push\sdk\geTui\igetui\utils\AppConditions;
+use jswei\push\sdk\geTui\igetui\utils\AppMessageCondition;
 use jswei\push\sdk\geTui\igetui\utils\OptType;
 use jswei\push\sdk\geTui\igetui\template\IGtTransmissionTemplate;
 
@@ -37,7 +38,6 @@ class GeTuiService extends BasePush implements PushInterface
     public static function init($config)
     {
         $class = new self();
-
         $class->config = $config;
         $class->AppKey = $config['AppKey'] ?? '';
         $class->AppID = $config['AppID'] ?? '';
@@ -47,6 +47,11 @@ class GeTuiService extends BasePush implements PushInterface
 
         return $class;
     }
+
+    /**
+     * GeTuiService constructor.
+     * @param $config
+     */
     public function __construct($config)
     {
         $this->config = $config;
@@ -58,9 +63,20 @@ class GeTuiService extends BasePush implements PushInterface
         $this->igt = new IGeTui(self::HOST, $this->AppKey, $this->MasterSecret);
 
     }
+
+    /**
+     * 获取个推实体类
+     * @return IGeTui
+     */
     public function getIGeTui(){
         return $this->igt;
     }
+
+    /**
+     * 设置配置
+     * @param $config
+     * @return $this
+     */
     public function setConfig($config)
     {
         $this->config = $config;
@@ -72,45 +88,64 @@ class GeTuiService extends BasePush implements PushInterface
         return $this;
     }
 
-    // 发送广播
-    public function sendAll($phoneTypeList=null,$provinceList=null,$tagList=null){
+    /**
+     * 向所有设备广播
+     * @param array $provinceList       地区
+     * @param array $tagList            标签
+     * @param array $phoneTypeList      设备类型
+     * @param OptType $optType          链接方式
+     */
+    public function sendAll($provinceList=[],$tagList=[],$phoneTypeList=[],AppMessageCondition $conditions=null){
         //定义透传模板，设置透传内容，和收到消息是否立即启动启用
         $template = $this->getTemplate();
-        //$template = IGtLinkTemplateDemo();
-        // 定义"AppMessage"类型消息对象，设置消息内容模板、发送的目标App列表、是否支持离线发送、以及离线消息有效期(单位毫秒)
         $message = new IGtAppMessage();
         $message->set_isOffline(true);
-        $message->set_offlineExpireTime(10 * 60 * 1000);//离线时间单位为毫秒，例，两个小时离线为3600*1000*2
+        $message->set_offlineExpireTime($this->offlineExpireTime??10 * 60 * 1000);//离线时间单位为毫秒，例，两个小时离线为3600*1000*2
         $message->set_data($template);
         $message->setPushTime($this->pushTime);
-        $message->set_speed(100);
+        $message->set_speed($this->speed??100);
         $appIdList = array($this->AppID);
         $message->set_appIdList($appIdList);
         if($phoneTypeList || $provinceList || $tagList){
             $cdt = new AppConditions();
             if($phoneTypeList){
-                $cdt->addCondition(AppConditions::PHONE_TYPE, $phoneTypeList);
+                $cdt->addCondition(AppConditions::PHONE_TYPE, $phoneTypeList,$conditions->PHONE_TYPE);
             }
             if($provinceList){
                 $provinceList = is_array($provinceList)?$provinceList:[$provinceList];
-                $cdt->addCondition(AppConditions::REGION, $provinceList,OptType::_AND_);
+                $cdt->addCondition(AppConditions::REGION, $provinceList,$conditions->REGION);
             }
             if($tagList){
                 $tagList = is_array($tagList)?$tagList:[$tagList];
-                $cdt->addCondition(AppConditions::TAG, $tagList);
+                $cdt->addCondition(AppConditions::TAG, $tagList,$conditions->TAG);
             }
             $message->set_conditions($cdt);
         }
+        p($message);die;
         $this->result = $this->igt->pushMessageToApp($message);
     }
-    // 安卓 - 广播
-    public function sendAllAndroid($provinceList=null,$tagList=null){
-        $this->sendAll(['ANDROID'],$provinceList,$tagList);
+
+    /**
+     * 安卓 - 广播
+     * @param array $provinceList     地区
+     * @param array $tagList           标签
+     * @param AppMessageCondition|null $conditions  条件
+     * @return $this
+     */
+    public function sendAllAndroid($provinceList=[],$tagList=[],AppMessageCondition $conditions=null){
+        $this->sendAll($provinceList,$tagList,['ANDROID'],$conditions);
         return $this;
     }
-    // IOS - 广播
-    public function sendAllIOS(){
-        $this->sendAll(['ISO']);
+
+    /**
+     * IOS-广播
+     * @param array $provinceList 发送的省市
+     * @param array $tagList      发送的标签
+     * @param AppMessageCondition $conditions      条件
+     * @return $this
+     */
+    public function sendAllIOS($provinceList=[],$tagList=[],AppMessageCondition $conditions=null){
+        $this->sendAll($provinceList,$tagList,['ISO'],$conditions);
         return $this;
     }
 
@@ -127,7 +162,7 @@ class GeTuiService extends BasePush implements PushInterface
         //定义"SingleMessage"
         $message = new IGtSingleMessage();
         $message->set_isOffline(true);//是否离线
-        $message->set_offlineExpireTime(3600*12*1000);//离线时间
+        $message->set_offlineExpireTime($this->offlineExpireTime??3600*12*1000);//离线时间
         $message->set_data($this->template??$template);//设置推送消息类型
         //$message->set_PushNetWorkType(0);//设置是否根据WIFI推送消息，2为4G/3G/2G，1为wifi推送，0为不限制推送
         //接收方
@@ -167,7 +202,7 @@ class GeTuiService extends BasePush implements PushInterface
         $template = $this->getTemplate();
         $message = new IGtListMessage();
         $message->set_isOffline(true);//是否离线
-        $message->set_offlineExpireTime(3600*12*1000);//离线时间
+        $message->set_offlineExpireTime($this->offlineExpireTime??3600*12*1000);//离线时间
         $message->set_data($template);//设置推送消息类型
         $message->set_PushNetWorkType(1);//设置是否根据WIFI推送消息，1为wifi推送，0为不限制推送
         $contentId = $this->igt->getContentId($message);

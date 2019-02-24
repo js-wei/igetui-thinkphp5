@@ -22,6 +22,8 @@ class BasePush
     protected $linkUrl;
     protected $templateType;
     protected $notify;
+    protected $offlineExpireTime;
+    protected $speed;
 
     protected $notyTitle;
     protected $notyContent;
@@ -64,6 +66,12 @@ class BasePush
     }
     public function setPopButton1($popButton1){
         $this->popButton1 = $popButton1;
+    }
+    public function setOfflineExpireTime($time){
+        $this->offlineExpireTime = $time;
+    }
+    public function setSendSpeed($speed){
+        $this->speed = $speed;
     }
 
     public function setPopButton2($popButton2){
