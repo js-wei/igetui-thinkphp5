@@ -6,7 +6,7 @@
  * Time: 下午5:05
  */
 namespace jswei\push\sdk\geTui\exception;
-class RequestException extends \Exception
+class RequestException extends \\Exception
 {
     var $requestId;
 

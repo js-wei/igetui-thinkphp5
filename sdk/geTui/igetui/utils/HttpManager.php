@@ -118,7 +118,7 @@ class HttpManager
             //LogUtils::debug("发送请求 post:{$data} return:{$resp}");
             $result = json_decode($resp, true);
             return $result;
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             throw new RequestException($params["requestId"],"httpPost:[".$url."] [" .$data." ] [ ".$result."]:",$e);
         }
     }

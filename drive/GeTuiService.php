@@ -121,7 +121,6 @@ class GeTuiService extends BasePush implements PushInterface
             }
             $message->set_conditions($cdt);
         }
-        p($message);die;
         $this->result = $this->igt->pushMessageToApp($message);
     }
 
@@ -207,7 +206,7 @@ class GeTuiService extends BasePush implements PushInterface
         $message->set_PushNetWorkType(1);//设置是否根据WIFI推送消息，1为wifi推送，0为不限制推送
         $contentId = $this->igt->getContentId($message);
         if(!$clientIdList){
-            throw Exception('client_id\'s not be empty!');
+            throw new \Exception('client_id\'s not be empty!');
         }
         $pushList=[];
         foreach ($clientIdList as $v){
@@ -219,7 +218,7 @@ class GeTuiService extends BasePush implements PushInterface
             }
         }
         if(!$pushList){
-            throw Exception('client_id\'s not be empty,please confirm again.');
+            throw new \Exception('client_id\'s not be empty,please confirm again.');
         }
         $this->result = $this->igt->pushMessageToList($contentId,$pushList);
         return $this;
@@ -261,35 +260,35 @@ class GeTuiService extends BasePush implements PushInterface
             case 2:
                 $template =  new IGtLinkTemplate();
                 if(!$this->linkUrl){
-                    throw Exception('Link linkUrl not be empty!');
+                    throw new \Exception('Link linkUrl not be empty!');
                 }
                 $template->set_url($this->linkUrl);
                 break;
             case 3:
                 $template =  new IGtNotyPopLoadTemplate();
                 if(!$this->notyTitle){
-                    throw  Exception('PopLoad notyTitle not be empty!');
+                    throw new \Exception('PopLoad notyTitle not be empty!');
                 }
                 if(!$this->notyContent){
-                    throw  Exception('PopLoad notyContent not be empty!');
+                    throw new \Exception('PopLoad notyContent not be empty!');
                 }
                 if(!$this->notyIcon){
-                    throw  Exception('PopLoad notyIcon not be empty!');
+                    throw new \Exception('PopLoad notyIcon not be empty!');
                 }
                 if(!$this->popContent){
-                    throw  Exception('PopLoad popContent not be empty!');
+                    throw new \Exception('PopLoad popContent not be empty!');
                 }
                 if(!$this->popImage){
-                    throw Exception('PopLoad popImage not be empty!');
+                    throw new \Exception('PopLoad popImage not be empty!');
                 }
                 if(!$this->loadIcon){
-                    throw Exception('PopLoad loadIcon not be empty!');
+                    throw new \Exception('PopLoad loadIcon not be empty!');
                 }
                 if(!$this->loadTitle){
-                    throw Exception('PopLoad loadTitle not be empty!');
+                    throw new \Exception('PopLoad loadTitle not be empty!');
                 }
                 if(!$this->loadUrl){
-                    throw Exception('PopLoad loadUrl not be empty!');
+                    throw new \Exception('PopLoad loadUrl not be empty!');
                 }
                 //通知栏
                 $template ->set_notyTitle($this->notyTitle);                 //通知栏标题
@@ -320,7 +319,7 @@ class GeTuiService extends BasePush implements PushInterface
                     $template->set_transmissionType(1);//透传消息类型
                     $template->set_transmissionContent($extendData);//透传内容
                 }else{
-                    throw Exception('payload not be empty!');
+                    throw new \Exception('payload not be empty!');
                 }
                 break;
             case 1:

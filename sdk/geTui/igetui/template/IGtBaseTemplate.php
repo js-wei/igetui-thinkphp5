@@ -73,9 +73,9 @@ class IGtBaseTemplate
         $ss = (string)strtotime($begin) * 1000;
         $e = (string)strtotime($end) * 1000;
         if ($ss <= 0 || $e <= 0)
-            throw new Exception("DateFormat: yyyy-MM-dd HH:mm:ss");
+            throw new \Exception("DateFormat: yyyy-MM-dd HH:mm:ss");
         if ($ss > $e)
-            throw new Exception("startTime should be smaller than endTime");
+            throw new \Exception("startTime should be smaller than endTime");
 
         $this->duration = $ss . "-" . $e;
 
@@ -231,7 +231,7 @@ class IGtBaseTemplate
         }
         $len = strlen($payload);
         if ($len > IGtAPNPayload::$PAYLOAD_MAX_BYTES) {
-            throw new Exception("APN payload length overlength (" . $len . ">" . IGtAPNPayload::$PAYLOAD_MAX_BYTES . ")");
+            throw new \Exception("APN payload length overlength (" . $len . ">" . IGtAPNPayload::$PAYLOAD_MAX_BYTES . ")");
         }
         $pushInfo = $this->get_pushInfo();
         $pushInfo->set_apnJson($payload);

@@ -39,7 +39,7 @@ class Payload
             $this->params = array();
         }
         if ($this->APS == strtolower($key)) {
-            throw new Exception("the key can't be aps");
+            throw new \Exception("the key can't be aps");
         }
         $this->params[$key] = $obj;
     }

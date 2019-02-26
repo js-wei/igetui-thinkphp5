@@ -340,7 +340,7 @@ function pushMessageToSingleBatch()
         $rep = $batch->submit();
         var_dump($rep);
         echo("<br><br>");
-    }catch(Exception $e){
+    }catch(\Exception $e){
         $rep=$batch->retry();
         var_dump($rep);
         echo ("<br><br>");

@@ -7,6 +7,11 @@
  */
 namespace jswei\push\sdk\geTui;
 
+use jswei\push\sdk\geTui\igetui\SingleBatchItem;
+use jswei\push\sdk\geTui\igetui\SingleBatchRequest;
+use jswei\push\sdk\geTui\igetui\utils\GTConfig;
+use jswei\push\sdk\geTui\igetui\utils\LangUtils;
+
 class IGtBatch
 {
     var $batchId;
@@ -16,7 +21,7 @@ class IGtBatch
     var $push;
     var $lastPostData;
 
-    public function __construct($appkey, $push)
+    public function __construct($appkey, IGeTui $push)
     {
         $this->APPKEY = $appkey;
         $this->push = $push;
@@ -32,7 +37,7 @@ class IGtBatch
     public function add($message, $target)
     {
         if ($this->seqId >= 5000) {
-            throw new Exception("Can not add over 5000 message once! Please call submit() first.");
+            throw new \Exception("Can not add over 5000 message once! Please call submit() first.");
         } else {
             $this->seqId += 1;
             $innerMsg = new SingleBatchItem();
