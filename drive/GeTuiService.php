@@ -109,15 +109,15 @@ class GeTuiService extends BasePush implements PushInterface
         if($phoneTypeList || $provinceList || $tagList){
             $cdt = new AppConditions();
             if($phoneTypeList){
-                $cdt->addCondition(AppConditions::PHONE_TYPE, $phoneTypeList,$conditions->PHONE_TYPE);
+                $cdt->addCondition(AppConditions::PHONE_TYPE, $phoneTypeList,$conditions->PHONE_TYPE??OptType::_OR_);
             }
             if($provinceList){
                 $provinceList = is_array($provinceList)?$provinceList:[$provinceList];
-                $cdt->addCondition(AppConditions::REGION, $provinceList,$conditions->REGION);
+                $cdt->addCondition(AppConditions::REGION, $provinceList,$conditions->REGION??OptType::_OR_);
             }
             if($tagList){
                 $tagList = is_array($tagList)?$tagList:[$tagList];
-                $cdt->addCondition(AppConditions::TAG, $tagList,$conditions->TAG);
+                $cdt->addCondition(AppConditions::TAG,$tagList,$conditions->TAG??OptType::_OR_);
             }
             $message->set_conditions($cdt);
         }
@@ -345,6 +345,4 @@ class GeTuiService extends BasePush implements PushInterface
         }
         return $template;
     }
-
-
 }
