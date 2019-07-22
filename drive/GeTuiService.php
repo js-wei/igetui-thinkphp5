@@ -122,6 +122,7 @@ class GeTuiService extends BasePush implements PushInterface
             $message->set_conditions($cdt);
         }
         $this->result = $this->igt->pushMessageToApp($message);
+        return $this;
     }
 
     /**
@@ -255,7 +256,7 @@ class GeTuiService extends BasePush implements PushInterface
 
     private function getTemplate()
     {
-        $templateType = $this->templateType ?? IGtTemplateTye::notification;
+        $templateType = $this->templateType ?? IGtTemplateTye::notifyInfo;
         switch ($templateType){
             case 2:
                 $template =  new IGtLinkTemplate();
@@ -274,6 +275,9 @@ class GeTuiService extends BasePush implements PushInterface
                 }
                 if(!$this->notyIcon){
                     throw new \Exception('PopLoad notyIcon not be empty!');
+                }
+                if(!$this->popTitle){
+                    throw new \Exception('PopLoad popTitle not be empty!');
                 }
                 if(!$this->popContent){
                     throw new \Exception('PopLoad popContent not be empty!');
@@ -319,7 +323,7 @@ class GeTuiService extends BasePush implements PushInterface
                     $template->set_transmissionType(1);//透传消息类型
                     $template->set_transmissionContent($extendData);//透传内容
                 }else{
-                    throw new \Exception('payload not be empty!');
+                    throw new \Exception('payload Transmission Data not be empty!');
                 }
                 break;
             case 1:
