@@ -5,6 +5,7 @@ use jswei\push\sdk\geTui\igetui\ActionChain;
 use jswei\push\sdk\geTui\igetui\ActionChain_Type;
 use jswei\push\sdk\geTui\igetui\AppStartUp;
 use jswei\push\sdk\geTui\igetui\NotifyInfo;
+use jswei\push\sdk\geTui\igetui\utils\GTConfig;
 
 class IGtTransmissionTemplate extends IGtBaseTemplate {
 
@@ -82,7 +83,6 @@ class IGtTransmissionTemplate extends IGtBaseTemplate {
             if($notify -> get_payload() != null){
                 $notifyInfo -> set_payload($notify -> get_payload());
             }
-
             if($notify -> get_intent() != null){
                 if(strlen($notify -> get_intent()) > GTConfig::getNotifyIntentLimit()){
                     throw \Exception("intent size overlimit " . GTConfig::getNotifyIntentLimit());
@@ -99,7 +99,6 @@ class IGtTransmissionTemplate extends IGtBaseTemplate {
                 $notifyInfo ->set_url($notify -> get_url());
             }
         }
-
         $pushInfo = $this-> get_pushInfo();
         $pushInfo -> set_notifyInfo($notifyInfo);
         $pushInfo -> set_validNotify(true);

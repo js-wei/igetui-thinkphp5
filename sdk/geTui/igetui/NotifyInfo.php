@@ -25,10 +25,10 @@ class NotifyInfo extends PBMessage
         $this->values["4"] = "";
         $this->fields["5"] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values["5"] = "";
-        $this->fields["6"] = "NotifyInfo_Type";
+        $this->fields["6"] = "\jswei\push\sdk\geTui\igetui\NotifyInfo_Type";
         $this->values["6"] = "";
-        $this->values["6"] = new NotifyInfo_Type();
-        $this->values["6"]->value = NotifyInfo_Type::_payload;
+        $this->values["6"] = '\jswei\push\sdk\geTui\igetui\NotifyInfo_Type';
+        $this->values["6"] = "";
         $this->fields["7"] = '\jswei\push\sdk\geTui\protobuf\type\PBString';
         $this->values["7"] = "";
     }

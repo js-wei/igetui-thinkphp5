@@ -45,7 +45,7 @@ class PushInfo extends PBMessage
         $this->values["14"] = "";
         $this->fields["15"] = '\jswei\push\sdk\geTui\protobuf\type\PBBool';
         $this->values["15"] = "";
-        $this->fields["16"] = "NotifyInfo";
+        $this->fields["16"] = "\jswei\push\sdk\geTui\igetui\NotifyInfo";
         $this->values["16"] = "";
     }
     function message()
