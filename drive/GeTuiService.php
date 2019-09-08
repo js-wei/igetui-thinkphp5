@@ -97,10 +97,10 @@ class GeTuiService extends BasePush implements PushInterface
      */
     public function sendAll($provinceList=[],$tagList=[],$phoneTypeList=[],AppMessageCondition $conditions=null){
         //定义透传模板，设置透传内容，和收到消息是否立即启动启用
-        $template = $this->getTemplate();
+        $template = $this->template ?? $this->getTemplate();
         $message = new IGtAppMessage();
         $message->set_isOffline(true);
-        $message->set_offlineExpireTime($this->offlineExpireTime??10 * 60 * 1000);//离线时间单位为毫秒，例，两个小时离线为3600*1000*2
+        $message->set_offlineExpireTime($this->offlineExpireTime??10 * 60 * 10000);//离线时间单位为毫秒，例，两个小时离线为3600*1000*2
         $message->set_data($template);
         $message->setPushTime($this->pushTime);
         $message->set_speed($this->speed??100);
@@ -158,7 +158,7 @@ class GeTuiService extends BasePush implements PushInterface
     {
         //消息模版：
         // 4.NotyPopLoadTemplate：通知弹框下载功能模板
-        $template = $this->getTemplate();
+        $template = $this->template ?? $this->getTemplate();
         //定义"SingleMessage"
         $message = new IGtSingleMessage();
         $message->set_isOffline(true);//是否离线
@@ -197,9 +197,9 @@ class GeTuiService extends BasePush implements PushInterface
      * @return $this
      */
     public function sendToUserList($clientIdList=[]){
-        putenv("gexin_pushList_needDetails=true");//是否开启needDetails
-        putenv("gexin_pushList_needAsync=true");//是否开启needAsync
-        $template = $this->getTemplate();
+//        putenv("gexin_pushList_needDetails=true");//是否开启needDetails
+//        putenv("gexin_pushList_needAsync=true");//是否开启needAsync
+        $template = $this->template ?? $this->getTemplate();
         $message = new IGtListMessage();
         $message->set_isOffline(true);//是否离线
         $message->set_offlineExpireTime($this->offlineExpireTime??3600*12*1000);//离线时间
